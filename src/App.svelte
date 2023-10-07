@@ -8,13 +8,13 @@
 </script>
 
 <Router>
-  <header class="bg-white dark:bg-gray-800">
+  <header class="bg-white dark:bg-slate-950">
     <Navbar />
   </header>
 
   <div
     style="max-height:100vh;"
-    class="bg-white dark:bg-gray-800 overflow-auto"
+    class="bg-white dark:bg-slate-950 overflow-auto"
   >
     <main class="px-8 pt-24 flex flex-col flex-wrap content-center">
       <LazyLangRoute path="/" this={() => import('./lib/pages/Home.svelte')} />
