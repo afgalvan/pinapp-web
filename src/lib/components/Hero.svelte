@@ -1,22 +1,19 @@
 <script>
   import { Section, News, HeroHeader } from 'flowbite-svelte-blocks';
+  import ShimmerButton from './atomic/ShimmerButton.svelte';
   import { t } from '../../locales/i18n';
 </script>
 
 <div class="section-gradient w-screen">
   <Section name="heroDefault">
-    <News classA="dark:bg-slate-950" href="https://apps.fsteam.net/people">
-      <span
-        class="text-xs bg-gradient-to-r from-green-600 to-green-400 rounded-full text-white px-4 py-1.5 mr-3"
-      >
-        {$t('hero.new')}
-      </span>
+    <News classA="dark:bg-slate-950" href="#app-zone">
+      <ShimmerButton size="sm" class="mr-1">{$t('hero.new')}</ShimmerButton>
       <span class="text-sm font-medium">{$t('hero.out')}</span>
     </News>
     <HeroHeader>
       <svelte:fragment slot="h1">
         {$t('hero.title')}
-        <span class="text-gradient">Aprehsi</span>
+        <span class="text-gradient">Rick & Morty</span>
       </svelte:fragment>
 
       <svelte:fragment slot="paragraph">
@@ -28,7 +25,12 @@
 
 <style>
   :is(.dark .section-gradient) {
-    background-image: linear-gradient(0deg, #010617, #014737 50%, #010617 100%);
+    background-image: linear-gradient(
+      0deg,
+      #010617,
+      rgba(120, 119, 198, 0.3) 50%,
+      #010617 100%
+    );
   }
 
   :is(.section-gradient) {

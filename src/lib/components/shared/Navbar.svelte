@@ -17,12 +17,19 @@
     GithubSolid,
   } from 'flowbite-svelte-icons';
   import { navigate, useLocation } from 'svelte-navigator';
-  import { locale } from '../../../locales/i18n';
+  import { locale, t } from '../../../locales/i18n';
+  import { scrollToSection } from '../../utils/scrollToSection';
 
   const location = useLocation();
   let path: string;
+
   $: {
     path = $location.pathname.slice(3).replace('/', '');
+    if ($location.hash == '#app-zone') {
+      setTimeout(() => {
+        scrollToSection('app-zone');
+      }, 100);
+    }
   }
 
   let dropdownOpened = false;
@@ -38,13 +45,13 @@
     <span
       class="self-center whitespace-nowrap text-xl font-semibold text-white"
     >
-      Inicio
+      {$t('header.title')}
     </span>
   </NavBrand>
 
   <div class="flex md:order-2">
     <DarkMode
-      class="ml-3 py-0 text-lg hover:bg-slate-800 dark:hover:bg-slate-900"
+      class="ml-3 py-0 text-lg hover:bg-slate-800 dark:hover:bg-slate-900 focus:ring-gray-700"
     >
       <svelte:fragment slot="lightIcon">
         <SunSolid />
@@ -57,7 +64,7 @@
       <NavLi id="nav-menu1" class="cursor-pointer">
         <button
           id="states-button"
-          class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+          class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center border rounded-lg focus:ring-4 focus:outline-none bg-slate-900 hover:bg-gray-600 focus:ring-gray-700 text-white border-gray-600"
           type="button"
         >
           {#if $locale == 'es'}
@@ -78,7 +85,7 @@
               const desiredLang = $locale == 'es' ? 'en' : 'es';
               localStorage.setItem('lang', desiredLang);
               locale.update(() => desiredLang);
-              navigate(`/${desiredLang}/${path}`);
+              navigate(`/${desiredLang}/${path}${$location.hash ?? ''}`);
             }}
             class="flex items-center hover:bg-slate-700"
           >

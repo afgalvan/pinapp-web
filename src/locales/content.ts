@@ -1,21 +1,27 @@
 export default {
   en: {
-    'hero.title': 'Your Exclusive Opportunity Portal for',
-    'hero.new': 'New',
-    'hero.out': "People is out! See what's new",
+    'header.title': 'Home',
 
+    'hero.new': 'Go now',
+    'hero.out': 'Check all the...',
+    'hero.title': 'List of every',
     'hero.description':
-      'At People, our mission is to provide you with unique access to career opportunities within Aprehsi. We provide you with the platform to register your resume and apply for available vacancies.',
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, debitis officia laboriosam laudantium sunt consequuntur vitae dolor, impedit recusandae itaque modi velit quae, minus culpa nisi asperiores dolore eligendi autem.',
+
+    'app.dummy': 'Characters',
 
     'footer.copyright': 'All Rights Reserved.',
   },
   es: {
-    'hero.title': 'Tu Portal de Oportunidades Exclusivo para',
-    'hero.new': 'Nuevo',
-    'hero.out': '¡People ya está disponible! Ver qué hay de nuevo',
+    'header.title': 'Inicio',
 
+    'hero.new': 'Ir ahora',
+    'hero.out': 'Consulta todos los...',
+    'hero.title': 'Listado de todos',
     'hero.description':
-      'Acceso único a las oportunidades laborales dentro de Aprehsi. Te brindamos la plataforma para registrar tu hoja de vida y postularte a las vacantes disponibles.',
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, debitis officia laboriosam laudantium sunt consequuntur vitae dolor, impedit recusandae itaque modi velit quae, minus culpa nisi asperiores dolore eligendi autem.',
+
+    'app.dummy': 'Personajes',
 
     'footer.copyright': 'Todos los derechos reservados.',
   },

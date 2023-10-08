@@ -13,7 +13,36 @@ const config = {
 
   theme: {
     extend: {
+      animation: {
+        spin: 'spin calc(var(--speed) * 2) infinite linear',
+        slide: 'slide var(--speed) ease-in-out infinite alternate',
+      },
+      keyframes: {
+        spin: {
+          '0%': {
+            rotate: '0deg',
+          },
+          '15%, 35%': {
+            rotate: '90deg',
+          },
+          '65%, 85%': {
+            rotate: '270deg',
+          },
+          '100%': {
+            rotate: '360deg',
+          },
+        },
+        slide: {
+          to: {
+            transform: 'translate(calc(100cqw - 100%), 0)',
+          },
+        },
+      },
       colors: {
+        'dark-card': 'hsl(233 100% 4%)',
+        'light-card': 'hsl(0 0% 100%)',
+        'dark-bd': 'hsl(240 3.7% 15.9%)',
+        'light-bd': 'hsl(240 5.9% 90%)',
         primary: {
           50: '#F3FAF7',
           100: '#DEF7EC',
