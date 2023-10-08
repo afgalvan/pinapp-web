@@ -1,15 +1,12 @@
 <script>
-  import { Section, News, HeroHeader } from 'flowbite-svelte-blocks';
-  import ShimmerButton from './atomic/ShimmerButton.svelte';
-  import { t } from '../../locales/i18n';
+  import { Section, HeroHeader } from 'flowbite-svelte-blocks';
+  import News from '../atomic/News.svelte';
+  import { t } from '../../../locales/i18n';
 </script>
 
 <div class="section-gradient w-screen">
   <Section name="heroDefault">
-    <News classA="dark:bg-slate-950" href="#app-zone">
-      <ShimmerButton size="sm" class="mr-1">{$t('hero.new')}</ShimmerButton>
-      <span class="text-sm font-medium">{$t('hero.out')}</span>
-    </News>
+    <News />
     <HeroHeader>
       <svelte:fragment slot="h1">
         {$t('hero.title')}

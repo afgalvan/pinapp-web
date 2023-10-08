@@ -18,19 +18,9 @@
   } from 'flowbite-svelte-icons';
   import { navigate, useLocation } from 'svelte-navigator';
   import { locale, t } from '../../../locales/i18n';
-  import { scrollToSection } from '../../utils/scrollToSection';
 
   const location = useLocation();
   let path: string;
-
-  $: {
-    path = $location.pathname.slice(3).replace('/', '');
-    if ($location.hash == '#app-zone') {
-      setTimeout(() => {
-        scrollToSection('app-zone');
-      }, 100);
-    }
-  }
 
   let dropdownOpened = false;
 </script>
@@ -85,7 +75,7 @@
               const desiredLang = $locale == 'es' ? 'en' : 'es';
               localStorage.setItem('lang', desiredLang);
               locale.update(() => desiredLang);
-              navigate(`/${desiredLang}/${path}${$location.hash ?? ''}`);
+              navigate(`/${desiredLang}/${path}`);
             }}
             class="flex items-center hover:bg-slate-700"
           >
@@ -98,7 +88,7 @@
         </Dropdown>
       </NavLi>
       <NavLi>
-        <a href="https://github.com/afgalvan/auth-api-fetch">
+        <a target="_blank" href="https://github.com/afgalvan/auth-api-fetch">
           <GradientButton size="sm" color="green" pill>
             <GithubSolid class="w-4 h-4 mr-2" />
             GitHub

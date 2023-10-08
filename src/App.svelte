@@ -3,7 +3,6 @@
   import Default from './lib/router/Default.svelte';
   import Navbar from './lib/components/shared/Navbar.svelte';
   import Footer from './lib/components/shared/Footer.svelte';
-  import LandingPage from './lib/pages/Home.svelte';
   import LazyLangRoute from './lib/components/shared/LazyLangRoute.svelte';
 </script>
 
@@ -18,6 +17,10 @@
   >
     <main class="px-8 pt-24 flex flex-col flex-wrap content-center">
       <LazyLangRoute path="/" this={() => import('./lib/pages/Home.svelte')} />
+      <LazyLangRoute
+        path="/stocks"
+        this={() => import('./lib/pages/Stocks.svelte')}
+      />
       <Route component={Default} />
       <Footer />
     </main>
