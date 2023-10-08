@@ -13,7 +13,9 @@
     <HeroHeader>
       <svelte:fragment slot="h1">
         {$t('hero.title')}
-        <span class="text-gradient">Rick & Morty</span>
+        <span class="text-gradient">
+          {$t('hero.highlight')}
+        </span>
       </svelte:fragment>
 
       <svelte:fragment slot="paragraph">

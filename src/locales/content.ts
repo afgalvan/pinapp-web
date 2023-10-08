@@ -3,12 +3,11 @@ export default {
     'header.title': 'Home',
 
     'hero.new': 'Go now',
-    'hero.out': 'Check all the...',
-    'hero.title': 'List of every',
+    'hero.out': 'Check all the stocks',
+    'hero.title': 'List and keep track of all the',
     'hero.description':
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, debitis officia laboriosam laudantium sunt consequuntur vitae dolor, impedit recusandae itaque modi velit quae, minus culpa nisi asperiores dolore eligendi autem.',
-
-    'app.dummy': 'Characters',
+      'Access stocks, forex and other financial assets from anywhere at any time, explore market data and more',
+    'hero.highlight': 'Stocks',
 
     'footer.copyright': 'All Rights Reserved.',
   },
@@ -16,12 +15,11 @@ export default {
     'header.title': 'Inicio',
 
     'hero.new': 'Ir ahora',
-    'hero.out': 'Consulta todos los...',
-    'hero.title': 'Listado de todos',
+    'hero.out': 'Consultar las acciones',
+    'hero.title': 'Lista y mantente al tanto del',
     'hero.description':
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, debitis officia laboriosam laudantium sunt consequuntur vitae dolor, impedit recusandae itaque modi velit quae, minus culpa nisi asperiores dolore eligendi autem.',
-
-    'app.dummy': 'Personajes',
+      'Acceda a acciones, divisas y otros activos financieros desde cualquier lugar y en cualquier momento, explore datos de mercado y más.',
+    'hero.highlight': 'Mercado',
 
     'footer.copyright': 'Todos los derechos reservados.',
   },

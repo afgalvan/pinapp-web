@@ -6,12 +6,7 @@ export const locale = writable(getLocale());
 export function getLocale() {
   const storedLocale =
     localStorage.getItem('lang') ?? location.pathname.slice(0, 3);
-  const userLocale =
-    storedLocale ??
-    (navigator.languages && navigator.languages.length
-      ? navigator.languages[0]
-      : navigator.language);
-  return userLocale.includes('en') ? 'en' : 'es';
+  return storedLocale ?? 'en';
 }
 
 function translate(locale: string, key: string, vars: any) {

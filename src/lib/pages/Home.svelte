@@ -3,6 +3,7 @@
   import GradientCard from '../components/atomic/GradientCard.svelte';
   import DataTable from '../components/shared/DataTable.svelte';
   import { t } from '../../locales/i18n';
+  import Chart from '../components/shared/Chart.svelte';
 </script>
 
 <Hero />
@@ -10,12 +11,7 @@
 <div id="app-zone" class="wrapper">
   <section class="row">
     <GradientCard dotted class="max-w-screen-md">
-      <p
-        class="mr-10 z-10 whitespace-pre-wrap text-center text-5xl font-medium tracking-tighter text-black dark:text-white"
-      >
-        {$t('app.dummy')}
-      </p>
-      <DataTable />
+      <Chart />
     </GradientCard>
   </section>
 </div>
