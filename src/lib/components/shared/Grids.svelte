@@ -1,4 +1,9 @@
-<div>
+<script>
+  let clazz = '';
+  export { clazz as class };
+</script>
+
+<div class={clazz}>
   <section class="grids">
     <slot />
   </section>
@@ -6,10 +11,7 @@
 
 <style>
   .grids {
-    display: grid;
-    place-items: center;
-    padding: 40px 0px;
-
+    width: 100%;
     background-size: 100px 100px;
     z-index: -2;
     background-image: url('/bg-grid.png');

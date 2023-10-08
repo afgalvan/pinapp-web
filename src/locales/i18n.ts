@@ -5,7 +5,8 @@ export const locale = writable(getLocale());
 
 export function getLocale() {
   const storedLocale =
-    localStorage.getItem('lang') ?? location.pathname.slice(0, 3);
+    localStorage.getItem('lang') ??
+    location.pathname.slice(0, 3).replace('/', '');
   return storedLocale ?? 'en';
 }
 

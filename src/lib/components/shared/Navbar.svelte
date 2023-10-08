@@ -17,25 +17,29 @@
     GithubSolid,
   } from 'flowbite-svelte-icons';
   import { navigate, useLocation } from 'svelte-navigator';
-  import { locale, t } from '../../../locales/i18n';
+  import { locale } from '../../../locales/i18n';
 
   const location = useLocation();
   let path: string;
+  $: {
+    path = $location.pathname.slice(3).replace('/', '');
+  }
 
   let dropdownOpened = false;
 </script>
 
 <Navbar
-  navClass="bg-slate-900 dark:bg-slate-950 px-2 sm:px-4 py-2.5 absolute w-full z-20 top-0 left-0 border-b"
+  navClass="bg-slate-900 dark:bg-slate-950 px-2 sm:px-4 py-2.5 absolute w-full z-[100] top-0 left-0 border-b"
   let:hidden
   let:toggle
   color="form"
 >
   <NavBrand href={`/${$locale}/`}>
+    <img src="/favicon.svg" class="mr-3 h-6 sm:h-9" alt="Price Profiler Logo" />
     <span
-      class="self-center whitespace-nowrap text-xl font-semibold text-white"
+      class="self-center text-xl whitespace-pre-wrap bg-gradient-to-b from-50% bg-clip-text text-center font-semibold leading-none tracking-tight from-white to-slate-900/10 text-transparent"
     >
-      {$t('header.title')}
+      Price Profiler
     </span>
   </NavBrand>
 
