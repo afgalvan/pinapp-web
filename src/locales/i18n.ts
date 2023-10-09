@@ -7,7 +7,12 @@ export function getLocale() {
   const storedLocale =
     localStorage.getItem('lang') ??
     location.pathname.slice(0, 3).replace('/', '');
-  return storedLocale ?? 'en';
+
+  const resultLocale =
+    storedLocale.trim() === '' || !storedLocale ? 'en' : storedLocale;
+  localStorage.setItem('lang', resultLocale);
+
+  return resultLocale;
 }
 
 function translate(locale: string, key: string, vars: any) {
