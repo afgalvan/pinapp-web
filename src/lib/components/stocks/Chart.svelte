@@ -41,6 +41,8 @@
     { value: '15min', name: '15 minutes' },
     { value: '1h', name: '1 hour' },
     { value: '1day', name: '1 day' },
+    { value: '1week', name: '1 week' },
+    { value: '1month', name: '1 month' },
   ];
 
   const outputsizes = [

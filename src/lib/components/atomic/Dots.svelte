@@ -1,3 +1,7 @@
+<script>
+  export let spreading = 16;
+</script>
+
 <svg
   aria-hidden="true"
   class="pointer-events-none absolute inset-0 h-full w-full fill-gray-400/40 [mask-image:radial-gradient(200px_circle_at_center,white,transparent)]"
@@ -5,8 +9,8 @@
   <defs>
     <pattern
       id=":r25:"
-      width="16"
-      height="16"
+      width={`${spreading}`}
+      height={`${spreading}`}
       patternUnits="userSpaceOnUse"
       patternContentUnits="userSpaceOnUse"
       x="0"

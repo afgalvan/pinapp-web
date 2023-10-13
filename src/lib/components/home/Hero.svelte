@@ -2,24 +2,27 @@
   import { Section, HeroHeader } from 'flowbite-svelte-blocks';
   import News from '../atomic/News.svelte';
   import { t } from '../../../locales/i18n';
+  import Meteor from '../atomic/Meteor.svelte';
 </script>
 
 <div class="section-gradient w-screen">
-  <Section name="heroDefault">
-    <News />
-    <HeroHeader>
-      <svelte:fragment slot="h1">
-        {$t('hero.title')}
-        <span class="text-gradient">
-          {$t('hero.highlight')}
-        </span>
-      </svelte:fragment>
+  <Meteor>
+    <Section name="heroDefault">
+      <News />
+      <HeroHeader>
+        <svelte:fragment slot="h1">
+          {$t('hero.title')}
+          <span class="text-gradient">
+            {$t('hero.highlight')}
+          </span>
+        </svelte:fragment>
 
-      <svelte:fragment slot="paragraph">
-        {$t('hero.description')}
-      </svelte:fragment>
-    </HeroHeader>
-  </Section>
+        <svelte:fragment slot="paragraph">
+          {$t('hero.description')}
+        </svelte:fragment>
+      </HeroHeader>
+    </Section>
+  </Meteor>
 </div>
 
 <style>

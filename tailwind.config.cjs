@@ -15,6 +15,7 @@ const config = {
     extend: {
       animation: {
         spin: 'spin calc(var(--speed) * 2) infinite linear',
+        meteor: 'meteor 5s linear infinite',
         slide: 'slide var(--speed) ease-in-out infinite alternate',
       },
       keyframes: {
@@ -35,6 +36,14 @@ const config = {
         slide: {
           to: {
             transform: 'translate(calc(100cqw - 100%), 0)',
+          },
+        },
+        meteor: {
+          '0%': { transform: 'rotate(215deg) translateX(0)', opacity: 1 },
+          '70%': { opacity: 1 },
+          '100%': {
+            transform: 'rotate(215deg) translateX(-500px)',
+            opacity: 0,
           },
         },
       },

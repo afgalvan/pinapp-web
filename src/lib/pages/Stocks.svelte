@@ -24,7 +24,6 @@
         </Maintenance>
       </Section>
       <GradientCard dotted>
-
         <Chart />
       </GradientCard>
     </div>

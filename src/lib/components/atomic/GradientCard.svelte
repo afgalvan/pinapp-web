@@ -11,7 +11,7 @@
   class={`relative flex h-full w-full items-center justify-center rounded-lg border border-light-bd dark:border-dark-bd bg-light-card dark:bg-dark-card p-20 shadow-2xl ${clazz}`}
 >
   {#if dotted}
-    <Dots />
+    <Dots spreading={15} />
   {/if}
   <slot />
   <div
