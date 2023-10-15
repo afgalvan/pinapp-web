@@ -4,7 +4,7 @@
 ## USAGE
 #-    bash build.sh
 
-image="sabores-del-valle-web"
+image="pinapp-web"
 
 tag=$(cat package.json | awk -v FS='("version": "|",)' '{print $2}' | awk -v ORS='' '{gsub(/[[:space:]]/,""); print}')
 echo "Building version $image:$tag"

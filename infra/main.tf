@@ -10,13 +10,13 @@ terraform {
 provider "docker" {}
 
 resource "docker_image" "web" {
-  name         = "sabores-del-valle-web"
+  name         = "pinapp-web"
   keep_locally = true
 }
 
 resource "docker_container" "web" {
   image = docker_image.web.name
-  name  = "sabores-del-valle-web"
+  name  = "pinapp-web"
   ports {
     internal = 80
     external = 80

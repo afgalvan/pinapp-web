@@ -5,7 +5,7 @@
 Clone the repo
 
 ```sh
-git clone https://github.com/afgalvan/sabores-del-valle.git
+git clone https://github.com/afgalvan/pinapp-web.git
 ```
 
 Tools needed for local development.
@@ -45,10 +45,10 @@ bash build.sh
 ```sh
 docker run \
   -p $port:80 \
-  --name sabores-del-valle-web \
+  --name pinapp-web \
   --restart=always \
   -d \
-  sabores-del-valle-web
+  pinapp-web
 ```
 
 - With terraform
