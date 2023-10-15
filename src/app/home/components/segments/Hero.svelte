@@ -37,10 +37,25 @@
   }
 
   .text-gradient {
-    background-image: linear-gradient(45deg, #057a55, #84e1bc 30%, white 60%);
+    animation: gradientAnimation 12s linear infinite;
+    background-image: radial-gradient(circle, #31c48d, #befeff, #4194f2);
+
+    animation-timing-function: linear;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 400%;
     background-position: 0%;
+  }
+
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 100% 0;
+    }
+    50% {
+      background-position: -100% 0;
+    }
+    100% {
+      background-position: 100% 0;
+    }
   }
 </style>

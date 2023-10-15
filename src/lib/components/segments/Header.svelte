@@ -13,6 +13,7 @@
     MoonSolid,
     ArrowLeftToBracketOutline,
   } from 'flowbite-svelte-icons';
+  import { link } from 'svelte-navigator';
 </script>
 
 <Navbar
@@ -21,14 +22,9 @@
   let:toggle
   color="form"
 >
-  <NavBrand href="/">
-    <img src="/favicon.svg" class="mr-3 h-6 sm:h-9" alt="Pinapp Logo" />
-    <span
-      class="self-center text-xl whitespace-pre-wrap bg-gradient-to-b from-50% bg-clip-text text-center font-semibold leading-none tracking-tight from-white to-slate-900/10 text-transparent"
-    >
-      Pinapp
-    </span>
-  </NavBrand>
+  <a class="flex" href="/" use:link>
+    <img src="/pinapp-letter.svg" class="h-8" alt="Pinapp Logo" />
+  </a>
 
   <div class="flex md:order-2">
     <DarkMode
