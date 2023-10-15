@@ -42,8 +42,8 @@
     <SidebarGroup class="relative pt-[28rem]">
       <SidebarCta label="Alpha">
         <p class="mb-3 text-sm text-primary-900 dark:text-primary-400">
-          Price Profiler is in alpha. Your feedback is invaluable. Thank you for
-          your understanding and support!
+          Sabores del Valle is in alpha. Your feedback is invaluable. Thank you
+          for your understanding and support!
         </p>
       </SidebarCta>
     </SidebarGroup>

@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Footer, FooterCopyright, Card } from 'flowbite-svelte';
-  import { t } from '../../../locales/i18n';
 </script>
 
 <Card size="xl" class="sm:p-0 w-screen max-w-none bg-slate-950 mt-2">
@@ -8,7 +7,7 @@
     <FooterCopyright
       href="https://github.com/afgalvan"
       by="Andres Galvan."
-      copyrightMessage={$t('footer.copyright')}
+      copyrightMessage="Todos los derechos reservados."
     />
   </Footer>
 </Card>

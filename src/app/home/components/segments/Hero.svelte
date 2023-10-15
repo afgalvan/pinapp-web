@@ -1,28 +1,25 @@
 <script>
   import { Section, HeroHeader } from 'flowbite-svelte-blocks';
   import News from '../atomic/News.svelte';
-  import { t } from '../../../locales/i18n';
-  import Meteor from '../atomic/Meteor.svelte';
+  import Snow from '$lib/components/atomic/Snow.svelte';
 </script>
 
 <div class="section-gradient w-screen">
-  <Meteor>
+  <Snow>
     <Section name="heroDefault">
       <News />
       <HeroHeader>
         <svelte:fragment slot="h1">
-          {$t('hero.title')}
-          <span class="text-gradient">
-            {$t('hero.highlight')}
-          </span>
+          Bienvenido a
+          <span class="text-gradient">Pinapp</span>
         </svelte:fragment>
 
         <svelte:fragment slot="paragraph">
-          {$t('hero.description')}
+          Aplicación de gestion de Sabores del Valle
         </svelte:fragment>
       </HeroHeader>
     </Section>
-  </Meteor>
+  </Snow>
 </div>
 
 <style>

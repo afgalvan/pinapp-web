@@ -1,16 +1,17 @@
 <script>
-  import { t } from '../../../locales/i18n';
-  import ShimmerButton from './ShimmerButton.svelte';
+  import ShimmerButton from '$lib/components/atomic/ShimmerButton.svelte';
   import { link } from 'svelte-navigator';
 </script>
 
 <a
-  href="stocks"
+  href="/#"
   use:link
   class="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 dark:bg-slate-950"
 >
-  <ShimmerButton size="sm" class="mr-1">{$t('hero.new')}</ShimmerButton>
-  <span class="text-sm font-medium s-Wq3gtYpWzWI4">{$t('hero.out')}</span>
+  <ShimmerButton size="sm" class="mr-1">Pronto</ShimmerButton>
+  <span class="text-sm font-medium s-Wq3gtYpWzWI4">
+    Cuando este lista podrás explorar
+  </span>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="currentColor"
