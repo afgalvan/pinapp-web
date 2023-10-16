@@ -1,7 +1,7 @@
 <script lang="ts">
   import { navigate } from 'svelte-navigator';
 
-  export let defaultRoute = '';
+  export let to = '';
 
-  navigate(`/${defaultRoute}`);
+  navigate(`/${to}`);
 </script>

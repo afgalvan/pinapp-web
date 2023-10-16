@@ -14,7 +14,7 @@
     style="max-height:100vh;"
     class="bg-white dark:bg-slate-950 overflow-auto"
   >
-    <main class="px-8 pt-24 flex flex-col flex-wrap content-center">
+    <main class="pt-24 flex flex-col flex-wrap content-center">
       <Routes />
       <Footer />
     </main>

@@ -8,7 +8,7 @@
 </script>
 
 <div
-  class={`relative flex h-full w-full items-center justify-center rounded-lg border border-light-bd dark:border-dark-bd bg-light-card dark:bg-dark-card p-20 shadow-2xl ${clazz}`}
+  class={`relative flex h-full w-full rounded-lg border border-light-bd dark:border-dark-bd bg-light-card dark:bg-dark-card shadow-2xl ${clazz}`}
 >
   {#if dotted}
     <Dots spreading={15} />

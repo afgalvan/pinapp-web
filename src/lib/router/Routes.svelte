@@ -5,4 +5,13 @@
 </script>
 
 <LazyRoute path="/" this={() => import('../../app/home/pages/Home.svelte')} />
+<LazyRoute
+  path="/auth/login"
+  this={() => import('../../app/login/pages/Login.svelte')}
+/>
+<LazyRoute
+  path="/panel/dashboard"
+  this={() => import('../../app/dashboard/pages/Dashboard.svelte')}
+  requiresAuth
+/>
 <Route component={Redirect} />

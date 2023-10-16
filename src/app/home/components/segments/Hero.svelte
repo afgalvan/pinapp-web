@@ -2,6 +2,7 @@
   import { Section, HeroHeader } from 'flowbite-svelte-blocks';
   import News from '../atomic/News.svelte';
   import Snow from '$lib/components/atomic/Snow.svelte';
+  import MetallicText from '$lib/components/atomic/MetallicText.svelte';
 </script>
 
 <div class="section-gradient w-screen">
@@ -10,12 +11,14 @@
       <News />
       <HeroHeader>
         <svelte:fragment slot="h1">
-          Bienvenido a
-          <span class="text-gradient">Pinapp</span>
+          <MetallicText class="md:text-5xl lg:text-6xl">
+            Bienvenido a
+            <span class="text-gradient">Pinapp</span>
+          </MetallicText>
         </svelte:fragment>
 
         <svelte:fragment slot="paragraph">
-          Aplicación de gestion de Sabores del Valle
+          Aplicación de gestion para Sabores del Valle
         </svelte:fragment>
       </HeroHeader>
     </Section>
@@ -38,7 +41,12 @@
 
   .text-gradient {
     animation: gradientAnimation 12s linear infinite;
-    background-image: radial-gradient(circle, #31c48d, #befeff, #4194f2);
+    background-image: radial-gradient(
+      circle,
+      #31c48d 10%,
+      rgb(174, 173, 249),
+      rgb(115, 113, 227)
+    );
 
     animation-timing-function: linear;
     -webkit-background-clip: text;

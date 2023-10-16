@@ -13,8 +13,12 @@ const config = {
 
   theme: {
     extend: {
+      boxShadow: {
+        '2xl': 'box-shadow: none !important;',
+      },
       animation: {
         spin: 'spin calc(var(--speed) * 2) infinite linear',
+        spinSpot: 'spin 3s infinite linear',
         meteor: 'meteor 5s linear infinite',
         slide: 'slide var(--speed) ease-in-out infinite alternate',
       },
@@ -31,6 +35,11 @@ const config = {
           },
           '100%': {
             rotate: '360deg',
+          },
+        },
+        spinSpot: {
+          '100%': {
+            transform: 'rotate(360deg)',
           },
         },
         slide: {

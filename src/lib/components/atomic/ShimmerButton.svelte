@@ -32,11 +32,9 @@
   <div
     class="absolute [background:var(--bg)] [border-radius:var(--radius)] [inset:var(--cut)]"
   />
-  <div
-    class="pointer-events-none relative z-10 flex text-white dark:text-black"
-  >
+  <div class="pointer-events-none relative z-10 flex">
     <span
-      class="whitespace-pre-wrap bg-gradient-to-b from-black from-30% to-gray-300/80 bg-clip-text text-center font-semibold leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 dark:text-transparent"
+      class="whitespace-pre-wrap bg-gradient-to-b from-black/5 from-30% to-gray-300/80 bg-clip-text text-center font-semibold leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 dark:text-transparent"
     >
       <slot />
     </span>

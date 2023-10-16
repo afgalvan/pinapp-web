@@ -3,17 +3,35 @@
     DarkMode,
     NavLi,
     Navbar,
-    NavBrand,
     NavUl,
     NavHamburger,
     GradientButton,
+    Badge,
   } from 'flowbite-svelte';
   import {
     SunSolid,
     MoonSolid,
     ArrowLeftToBracketOutline,
   } from 'flowbite-svelte-icons';
-  import { link } from 'svelte-navigator';
+  import { link, useLocation } from 'svelte-navigator';
+  import SpotlightButton from '../atomic/SpotlightButton.svelte';
+  import { supabase } from '$lib/supabase';
+  import { onMount } from 'svelte';
+  import type { User } from '@supabase/supabase-js';
+  import { logout } from '$lib/services/logout';
+
+  const location = useLocation();
+
+  let path: string;
+  $: {
+    path = $location.pathname;
+  }
+
+  let user: User | null;
+
+  onMount(async () => {
+    user = (await supabase.auth.getUser()).data.user;
+  });
 </script>
 
 <Navbar
@@ -23,7 +41,7 @@
   color="form"
 >
   <a class="flex" href="/" use:link>
-    <img src="/pinapp-letter.svg" class="h-8" alt="Pinapp Logo" />
+    <img src="/favicon.svg" class="h-8" alt="Pinapp Logo" />
   </a>
 
   <div class="flex md:order-2">
@@ -38,16 +56,32 @@
       </svelte:fragment>
     </DarkMode>
     <NavUl {hidden}>
-      <NavLi>
-        <a href="/#">
-          <GradientButton size="sm" color="green" pill>
+      {#if path === '/' && !user}
+        <NavLi>
+          <a href="/auth/login" use:link>
+            <SpotlightButton>
+              <svelte:fragment slot="icon">
+                <ArrowLeftToBracketOutline class="w-4 h-4 mr-2" />
+              </svelte:fragment>
+              Iniciar Sesión
+            </SpotlightButton>
+          </a>
+        </NavLi>
+      {/if}
+      {#if user}
+        <NavLi>
+          <Badge class="mr-2" rounded color="indigo">{user.email}</Badge>
+
+          <GradientButton color="green" on:click={logout}>
             <ArrowLeftToBracketOutline class="w-4 h-4 mr-2" />
-            Iniciar Sesión
+            Salir
           </GradientButton>
-        </a>
-      </NavLi>
+        </NavLi>
+      {/if}
     </NavUl>
 
-    <NavHamburger on:click={toggle} />
+    {#if path === '/'}
+      <NavHamburger on:click={toggle} />
+    {/if}
   </div>
 </Navbar>
