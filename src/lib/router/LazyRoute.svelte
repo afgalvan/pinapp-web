@@ -1,12 +1,10 @@
 <script lang="ts">
-  import { Spinner } from 'flowbite-svelte';
   import Lazy from './Lazy.svelte';
   import { Route } from 'svelte-navigator';
   import { fly } from 'svelte/transition';
-  import { verifyAuthentication } from '$lib/services/verifyAuthentication';
   import Redirect from './Redirect.svelte';
   import Loading from '$lib/components/atomic/Loading.svelte';
-  import { onMount } from 'svelte';
+  import { auth } from '$lib/stores/auth';
 
   export let path: string;
   export let requiresAuth = false;
@@ -16,10 +14,10 @@
 
   let isAuthenticated: boolean;
   let loading = true;
-  onMount(async () => {
-    isAuthenticated = await verifyAuthentication();
+  $: {
+    isAuthenticated = $auth.isAuthenticated;
     loading = false;
-  });
+  }
 </script>
 
 <Route {path} primary={false}>

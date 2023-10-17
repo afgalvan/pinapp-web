@@ -15,10 +15,9 @@
   } from 'flowbite-svelte-icons';
   import { link, useLocation } from 'svelte-navigator';
   import SpotlightButton from '../atomic/SpotlightButton.svelte';
-  import { supabase } from '$lib/supabase';
-  import { onMount } from 'svelte';
   import type { User } from '@supabase/supabase-js';
-  import { logout } from '$lib/services/logout';
+  import { signOut } from '$lib/services/logout';
+  import { auth } from '$lib/stores/auth';
 
   const location = useLocation();
 
@@ -29,9 +28,9 @@
 
   let user: User | null;
 
-  onMount(async () => {
-    user = (await supabase.auth.getUser()).data.user;
-  });
+  $: {
+    user = $auth.user;
+  }
 </script>
 
 <Navbar
@@ -71,8 +70,7 @@
       {#if user}
         <NavLi>
           <Badge class="mr-2" rounded color="indigo">{user.email}</Badge>
-
-          <GradientButton color="green" on:click={logout}>
+          <GradientButton pill color="green" on:click={signOut}>
             <ArrowLeftToBracketOutline class="w-4 h-4 mr-2" />
             Salir
           </GradientButton>
