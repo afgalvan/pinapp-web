@@ -31,7 +31,7 @@
         inapp
       </a>
 
-      <GradientCard class="md:mt-0 xl:p-0 items-center w-[600px]">
+      <GradientCard class="h-full md:mt-0 xl:p-0 items-center w-[600px]">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8 w-full">
           <LoginForm />
         </div>

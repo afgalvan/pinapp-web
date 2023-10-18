@@ -8,10 +8,8 @@
   use:link
   class="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 dark:bg-slate-950"
 >
-  <ShimmerButton size="sm" class="mr-1">Pronto</ShimmerButton>
-  <span class="text-sm font-medium s-Wq3gtYpWzWI4">
-    Cuando este lista podrás explorar
-  </span>
+  <ShimmerButton size="sm" class="mr-1">Ingresa</ShimmerButton>
+  <span class="text-sm font-medium">Explora todas las opciones</span>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="currentColor"

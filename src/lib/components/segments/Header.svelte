@@ -7,6 +7,7 @@
     NavHamburger,
     GradientButton,
     Badge,
+    Spinner,
   } from 'flowbite-svelte';
   import {
     SunSolid,
@@ -16,8 +17,9 @@
   import { link, useLocation } from 'svelte-navigator';
   import SpotlightButton from '../atomic/SpotlightButton.svelte';
   import type { User } from '@supabase/supabase-js';
-  import { signOut } from '$lib/services/logout';
+  import { signOut } from '$lib/services/signOut';
   import { auth } from '$lib/stores/auth';
+  import { APP_VERSION } from '$lib/config';
 
   const location = useLocation();
 
@@ -31,6 +33,8 @@
   $: {
     user = $auth.user;
   }
+
+  let signingOut = false;
 </script>
 
 <Navbar
@@ -39,10 +43,14 @@
   let:toggle
   color="form"
 >
-  <a class="flex" href="/" use:link>
-    <img src="/favicon.svg" class="h-8" alt="Pinapp Logo" />
-  </a>
-
+  <div class="grid grid-cols-2">
+    <a class="grid place-content-center" href="/" use:link>
+      <img src="/favicon.svg" class="h-8" alt="Pinapp Logo" />
+    </a>
+    <span class="grid place-content-center mt-1">
+      <Badge rounded color="purple">v{APP_VERSION}</Badge>
+    </span>
+  </div>
   <div class="flex md:order-2">
     <DarkMode
       class="ml-3 py-0 text-lg hover:bg-slate-800 dark:hover:bg-slate-900 focus:ring-gray-700"
@@ -69,10 +77,27 @@
       {/if}
       {#if user}
         <NavLi>
-          <Badge class="mr-2" rounded color="indigo">{user.email}</Badge>
-          <GradientButton pill color="green" on:click={signOut}>
-            <ArrowLeftToBracketOutline class="w-4 h-4 mr-2" />
-            Salir
+          <Badge
+            class="mr-2 bg-indigo-900 text-indigo-300"
+            rounded
+            color="indigo">{user.email}</Badge
+          >
+          <GradientButton
+            pill
+            color="green"
+            on:click={async () => {
+              signingOut = true;
+              await signOut();
+              signingOut = false;
+            }}
+          >
+            {#if signingOut}
+              <Spinner class="mr-3" color="white" size="4" />
+              Cerrando sesión...
+            {:else}
+              <ArrowLeftToBracketOutline class="w-4 h-4 mr-2" />
+              Salir
+            {/if}
           </GradientButton>
         </NavLi>
       {/if}

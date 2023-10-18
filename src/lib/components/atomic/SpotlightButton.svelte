@@ -1,16 +1,16 @@
 <button
-  class="group relative inline-flex items-center overflow-hidden rounded-full bg-zinc-800 px-4 py-3 transition focus:ring-green-300 dark:focus:ring-green-800"
+  class="group relative inline-flex items-center overflow-hidden rounded-full bg-zinc-800 px-4 py-3 transition-all focus:ring-green-300 dark:focus:ring-green-800 duration-300 ease-in-out hover:shadow-[0_0_20px_10px_rgba(46,204,113,0.1)]"
 >
   <div class="absolute inset-0 flex items-center [container-type:inline-size]">
     <div
-      class="absolute h-[50px] w-[50px] bg-[conic-gradient(from_0_at_50%_50%,rgba(255,255,255,0.5)_0deg,transparent_60deg,transparent_300deg,rgba(255,255,255,0.5)_360deg)] opacity-0 transition duration-300 group-hover:opacity-100"
+      class="absolute h-[100cqw] w-[100cqw] animate-spinSpot bg-[conic-gradient(from_0_at_50%_50%,rgba(255,255,255,0.5)_0deg,transparent_60deg,transparent_300deg,rgba(255,255,255,0.5)_360deg)] opacity-0 transition duration-300 group-hover:opacity-100"
     />
   </div>
   <div
     class="absolute inset-0.5 rounded-full bg-gradient-to-r from-green-400 via-green-600 to-green-700"
   />
   <div
-    class="absolute bottom-0 left-1/2 h-1/3 w-4/5 -translate-x-1/2 rounded-full bg-green-300 opacity-50 blur-md transition-all duration-500 group-hover:h-2/3 group-hover:opacity-100"
+    class="absolute bottom-0 left-1/2 h-1/3 w-4/5 -translate-x-1/2 rounded-full bg-green-400 opacity-50 blur-md transition-all duration-500 group-hover:h-2/3 group-hover:opacity-100"
   />
   <div class="relative inline-flex items-center gap-2">
     <span

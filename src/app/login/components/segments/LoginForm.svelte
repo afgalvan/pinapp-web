@@ -1,5 +1,11 @@
 <script lang="ts">
-  import { Checkbox, Label, Input, GradientButton } from 'flowbite-svelte';
+  import {
+    Checkbox,
+    Label,
+    Input,
+    GradientButton,
+    Spinner,
+  } from 'flowbite-svelte';
   import { navigate } from 'svelte-navigator';
 
   import { authenticate } from '$lib/stores/auth';
@@ -9,6 +15,7 @@
   import { login } from '../../services/login';
 
   const form = useForm();
+  let submitting = false;
 
   let formData: User = { email: '', password: '' };
 
@@ -16,11 +23,13 @@
     e.preventDefault();
     $form.touched = true;
     if (!$form.valid) return;
+    submitting = true;
     const user = await login(formData);
     if (user) {
       authenticate(user);
       navigate('/panel/dashboard');
     }
+    submitting = false;
   };
 </script>
 
@@ -53,10 +62,16 @@
   <hr class="dark:border-white/10" />
   <GradientButton
     on:click={onSubmit}
+    disabled={submitting}
     color="green"
     type="submit"
     class="w-full1"
   >
-    Iniciar sesión
+    {#if submitting}
+      <Spinner class="mr-3" color="white" size="4" />
+      Iniciando sesión...
+    {:else}
+      Iniciar sesión
+    {/if}
   </GradientButton>
 </form>

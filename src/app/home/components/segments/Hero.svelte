@@ -3,6 +3,7 @@
   import News from '../atomic/News.svelte';
   import Snow from '$lib/components/atomic/Snow.svelte';
   import MetallicText from '$lib/components/atomic/MetallicText.svelte';
+  import { link } from 'svelte-navigator';
 </script>
 
 <div class="section-gradient w-screen">
@@ -13,7 +14,12 @@
         <svelte:fragment slot="h1">
           <MetallicText class="md:text-5xl lg:text-6xl">
             Bienvenido a
-            <span class="text-gradient">Pinapp</span>
+            <a
+              href="/panel/dashboard"
+              use:link
+              class="text-gradient transition-all duration-200 [font-variation-settings:'wdth'_100] hover:font-extrabold hover:[font-variation-settings:'wdth'_125]"
+              >Pinapp</a
+            >
           </MetallicText>
         </svelte:fragment>
 

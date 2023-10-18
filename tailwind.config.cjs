@@ -17,13 +17,13 @@ const config = {
         '2xl': 'box-shadow: none !important;',
       },
       animation: {
-        spin: 'spin calc(var(--speed) * 2) infinite linear',
-        spinSpot: 'spin 3s infinite linear',
+        spinShimmer: 'spinShimmer calc(var(--speed) * 2) infinite linear',
+        spinSpot: 'spinSpot 3s infinite linear',
         meteor: 'meteor 5s linear infinite',
         slide: 'slide var(--speed) ease-in-out infinite alternate',
       },
       keyframes: {
-        spin: {
+        spinShimmer: {
           '0%': {
             rotate: '0deg',
           },
