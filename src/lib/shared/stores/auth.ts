@@ -14,11 +14,10 @@ const initialAuthStatus = {
 
 export const auth = writable<AuthStore>(initialAuthStatus);
 
-const initializeSession = async () => {
-  try {
-    const user = await getInitialSession();
+export const initializeSession = async () => {
+  getInitialSession().then((user) => {
     authenticate(user);
-  } catch (ignore) {}
+  });
 };
 
 export function authenticate(user: User | null) {
@@ -37,5 +36,3 @@ export function logout() {
   };
   auth.set(updatedAuthStatus);
 }
-
-initializeSession();
