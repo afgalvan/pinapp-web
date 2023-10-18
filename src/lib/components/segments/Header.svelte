@@ -17,9 +17,7 @@
   import { link, useLocation } from 'svelte-navigator';
   import SpotlightButton from '../atomic/SpotlightButton.svelte';
   import type { User } from '@supabase/supabase-js';
-  import { signOut } from '$lib/services/signOut';
-  import { auth } from '$lib/stores/auth';
-  import { APP_VERSION } from '$lib/config';
+  import { auth, APP_VERSION, signOut } from '$lib/shared';
 
   const location = useLocation();
 
@@ -52,16 +50,18 @@
     </span>
   </div>
   <div class="flex md:order-2">
-    <DarkMode
-      class="ml-3 py-0 text-lg hover:bg-slate-800 dark:hover:bg-slate-900 focus:ring-gray-700"
-    >
-      <svelte:fragment slot="lightIcon">
-        <SunSolid />
-      </svelte:fragment>
-      <svelte:fragment slot="darkIcon">
-        <MoonSolid />
-      </svelte:fragment>
-    </DarkMode>
+    <div class="grid place-content-center">
+      <DarkMode
+        class="ml-3 text-lg hover:bg-slate-800 dark:hover:bg-slate-900 focus:ring-gray-700"
+      >
+        <svelte:fragment slot="lightIcon">
+          <SunSolid />
+        </svelte:fragment>
+        <svelte:fragment slot="darkIcon">
+          <MoonSolid />
+        </svelte:fragment>
+      </DarkMode>
+    </div>
     <NavUl {hidden}>
       {#if path === '/' && !user}
         <NavLi>

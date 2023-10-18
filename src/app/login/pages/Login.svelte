@@ -2,7 +2,7 @@
   import GradientCard from '$lib/components/atomic/GradientCard.svelte';
   import Loading from '$lib/components/atomic/Loading.svelte';
   import Grid from '$lib/components/atomic/Grid.svelte';
-  import { auth } from '$lib/stores/auth';
+  import { auth } from '$lib/shared';
   import { Section } from 'flowbite-svelte-blocks';
   import { navigate, link } from 'svelte-navigator';
   import LoginForm from '../components/segments/LoginForm.svelte';

@@ -4,7 +4,7 @@
   import { fly } from 'svelte/transition';
   import Redirect from './Redirect.svelte';
   import Loading from '$lib/components/atomic/Loading.svelte';
-  import { auth } from '$lib/stores/auth';
+  import { auth } from '$lib/shared';
 
   export let path: string;
   export let requiresAuth = false;

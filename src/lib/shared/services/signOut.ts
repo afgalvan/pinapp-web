@@ -1,5 +1,4 @@
-import { logout } from '$lib/stores/auth';
-import { supabase } from '$lib/supabase';
+import { logout, supabase } from '$lib/shared';
 import { navigate } from 'svelte-navigator';
 
 export const signOut = async (): Promise<void> => {

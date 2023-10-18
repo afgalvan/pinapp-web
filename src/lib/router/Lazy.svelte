@@ -1,5 +1,5 @@
 <script lang="ts">
-  import viewport from '../hooks/useViewportAction';
+  import viewport from '../shared/hooks/useViewportAction';
 
   let loadComponent: any;
   export { loadComponent as this };

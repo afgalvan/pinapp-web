@@ -1,4 +1,4 @@
-import { getInitialSession } from '$lib/services/getInitialSession';
+import { getInitialSession } from '$lib/shared';
 import type { User } from '@supabase/supabase-js';
 import { writable } from 'svelte/store';
 
@@ -15,8 +15,10 @@ const initialAuthStatus = {
 export const auth = writable<AuthStore>(initialAuthStatus);
 
 const initializeSession = async () => {
-  const user = await getInitialSession();
-  authenticate(user);
+  try {
+    const user = await getInitialSession();
+    authenticate(user);
+  } catch (ignore) {}
 };
 
 export function authenticate(user: User | null) {

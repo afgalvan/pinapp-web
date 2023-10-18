@@ -1,55 +1,56 @@
 <script lang="ts">
   import {
     Checkbox,
-    Label,
-    Input,
     GradientButton,
     Spinner,
+    Hr,
+    Button,
   } from 'flowbite-svelte';
+  import { GoogleSolid } from 'flowbite-svelte-icons';
   import { navigate } from 'svelte-navigator';
 
-  import { authenticate } from '$lib/stores/auth';
+  import { authenticate, useForm } from '$lib/shared';
+  import Input from '$lib/forms/components/Input.svelte';
 
-  import { useForm } from 'svelte-use-form';
-  import type { User } from '../../models/user';
-  import { login } from '../../services/login';
+  import { login, oauthLogin } from '../../services/login';
+  import { email } from 'svelte-use-form/validators';
+  import ServerResponse from '$lib/components/atomic/ServerResponse.svelte';
+  import { writable } from 'svelte/store';
 
-  const form = useForm();
-  let submitting = false;
+  const { form, onSubmit, isSubmitting, isSubmitted } = useForm();
+  let errorMessage = writable<string | undefined>();
 
-  let formData: User = { email: '', password: '' };
-
-  const onSubmit = async (e: Event) => {
-    e.preventDefault();
-    $form.touched = true;
-    if (!$form.valid) return;
-    submitting = true;
-    const user = await login(formData);
-    if (user) {
-      authenticate(user);
+  const submit = onSubmit(async () => {
+    const data = await login($form.values as any);
+    errorMessage.set(data.message);
+    if (data.user) {
+      authenticate(data.user);
       navigate('/panel/dashboard');
     }
-    submitting = false;
-  };
+  });
 </script>
 
 <form class="flex flex-col space-y-6" use:form>
   <h3 class="text-xl font-medium text-gray-900 dark:text-white p-0">
     Inicio Sesión
   </h3>
-  <Label class="space-y-2">
-    <span>Correo electrónico</span>
-    <Input bind:value={formData.email} type="email" name="email" required />
-  </Label>
-  <Label class="space-y-2">
-    <span>Contraseña</span>
-    <Input
-      bind:value={formData.password}
-      type="password"
-      name="password"
-      required
-    />
-  </Label>
+  <Input
+    label="Correo electrónico"
+    type="email"
+    name="email"
+    disabled={$isSubmitting}
+    error={$isSubmitted && !$form.valid}
+    required
+    validations={[email]}
+  />
+  <Input
+    label="Contraseña"
+    type="password"
+    name="password"
+    disabled={$isSubmitting}
+    error={$isSubmitted && !$form.valid}
+    required
+  />
   <div class="flex items-start">
     <Checkbox>Recordar</Checkbox>
     <a
@@ -59,19 +60,31 @@
       Olvidaste tu contraseña?
     </a>
   </div>
-  <hr class="dark:border-white/10" />
+  <Hr />
   <GradientButton
-    on:click={onSubmit}
-    disabled={submitting}
+    on:click={submit}
+    disabled={$isSubmitting}
     color="green"
     type="submit"
     class="w-full1"
   >
-    {#if submitting}
+    {#if $isSubmitting}
       <Spinner class="mr-3" color="white" size="4" />
       Iniciando sesión...
     {:else}
       Iniciar sesión
     {/if}
   </GradientButton>
+  <Button
+    color="light"
+    disabled={$isSubmitting}
+    on:click={() => {
+      isSubmitting.set(true);
+      oauthLogin({ provider: 'google' });
+    }}
+  >
+    <GoogleSolid class="w-4 h-4 mr-2" size="sm" />
+    Iniciar sesión con Google
+  </Button>
+  <ServerResponse message={errorMessage} />
 </form>
