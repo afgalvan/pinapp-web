@@ -20,22 +20,20 @@
 {#if isLoading}
   <Loading />
 {:else}
-  <Grid class="h-[80.5vh]" center>
-    <Section sectionClass="h-full" name="login">
+  <Grid class="w-full h-[800px]" center>
+    <div class="grid place-content-center">
       <a
         href="/"
         use:link
         class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
       >
-        <img class="w-8 h-8 mb-4" src="/favicon.svg" alt="logo" />
+        <img class="w-8 h-8 mb-4" src="/favicon.svg" alt="P letter logo" />
         inapp
       </a>
+    </div>
 
-      <GradientCard class="h-full md:mt-0 xl:p-0 items-center w-[600px]">
-        <div class="p-6 space-y-4 md:space-y-6 sm:p-8 w-full">
-          <LoginForm />
-        </div>
-      </GradientCard>
-    </Section>
+    <GradientCard class="p-6 pt-10 pb-10">
+      <LoginForm />
+    </GradientCard>
   </Grid>
 {/if}

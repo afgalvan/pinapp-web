@@ -8,15 +8,13 @@
 </script>
 
 {#if $message}
-  <div transition:fade={{ duration: 500 }}>
+  <div class="w-full flex justify-center" transition:fade={{ duration: 500 }}>
     <Alert
-      dismissable
       on:close={() => message.set(undefined)}
       color="red"
-      class="border border-red-500 dark:bg-red-400 dark:bg-opacity-20 bg-red-200 bg-opacity-50"
+      class="border w-[80%] border-red-500 dark:bg-red-400 dark:bg-opacity-20 bg-red-200 bg-opacity-50 justify-center"
     >
       <InfoCircleSolid slot="icon" class="w-4 h-4" />
-      <span class="font-medium">Error!</span>
       {$message}
     </Alert>
   </div>

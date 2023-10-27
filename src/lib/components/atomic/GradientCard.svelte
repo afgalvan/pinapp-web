@@ -8,8 +8,8 @@
   export { clazz as class };
 </script>
 
-<Card
-  class="border-light-bd dark:border-dark-bd bg-light-card dark:bg-dark-card p-0 relative {clazz}"
+<div
+  class="border rounded-lg p-4 border-light-bd dark:border-dark-bd bg-light-card dark:bg-dark-card relative {clazz}"
 >
   {#if dotted}
     <Dots spreading={15} />
@@ -19,4 +19,4 @@
     class="rounded-lg"
     style={`position: absolute; pointer-events: none; inset: 0px; width: 100%; height: 100%; background: linear-gradient(rgba(0, 0, 0, 0), 50%, ${color});`}
   />
-</Card>
+</div>
