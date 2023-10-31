@@ -1,6 +1,6 @@
 import { supabase } from '$lib/shared';
 import type { SignInWithOAuthCredentials } from '@supabase/supabase-js';
-import type { User } from '../models/user';
+import type { User } from '../models/User';
 
 export const login = async ({ email, password }: User) => {
   const response = await supabase.auth.signInWithPassword({ password, email });

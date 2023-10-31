@@ -6,3 +6,4 @@ export * from './utils/animation';
 export * from './utils/scrollToSection';
 export * from './services/getInitialSession';
 export * from './services/signOut';
+export * from './models';

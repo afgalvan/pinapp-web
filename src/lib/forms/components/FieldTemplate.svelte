@@ -1,12 +1,13 @@
-<script>
+<script lang="ts">
   import { Label } from 'flowbite-svelte';
+  import FieldError from './FieldError.svelte';
 
   export let required = false;
   export let label = '';
-  export let error = false;
+  export let error: string | undefined = undefined;
 </script>
 
-<div class="flex flex-col">
+<div class="flex flex-col mb-2">
   <Label class="space-y-2" color={error ? 'red' : 'gray'}>
     {label}
     {#if required}
@@ -14,4 +15,7 @@
     {/if}
     <slot />
   </Label>
+  {#if error}
+    <FieldError {error} />
+  {/if}
 </div>

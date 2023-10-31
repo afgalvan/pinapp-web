@@ -1,14 +1,15 @@
 <script lang="ts">
-  import { Checkbox, GradientButton, Spinner, Button } from 'flowbite-svelte';
+  import { Checkbox, Button } from 'flowbite-svelte';
   import { GoogleSolid } from 'flowbite-svelte-icons';
   import { navigate } from 'svelte-navigator';
 
-  import Input from '$lib/forms/components/Input.svelte';
-
   import { login, oauthLogin } from '../../services/login';
-  import { email } from 'svelte-use-form/validators';
   import Form from '$lib/forms/Form.svelte';
   import { authenticate } from '$lib/shared';
+  import type { FormField } from '$lib/shared/models';
+  import type { User } from '$app/login/models/User';
+  import { email, required } from 'svelte-forms/validators';
+  import { field } from 'svelte-forms';
 
   const onSucceed = async (data: any) => {
     if (data.user) {
@@ -16,53 +17,39 @@
       navigate('/panel/dashboard');
     }
   };
+
+  const fields: FormField<User>[] = [
+    {
+      name: 'email',
+      label: 'Email',
+      variant: 'input',
+      required: true,
+      validators: [email()],
+    },
+    {
+      name: 'password',
+      label: 'Contraseña',
+      type: 'password',
+      variant: 'input',
+      required: true,
+    },
+  ];
 </script>
 
+<h3 class="text-xl font-medium text-gray-900 dark:text-white p-0 mb-2">
+  Inicio Sesión
+</h3>
+
 <Form
+  fields={[field('email', '', [email(), required()])]}
+  formFields={fields}
   class="grid gap-6 w-[500px]"
   onSubmit={login}
   {onSucceed}
   withErrorMessage
   let:isSubmitting
-  let:hasSubmitted
   let:startSubmission
 >
-  <h3 class="text-xl font-medium text-gray-900 dark:text-white p-0">
-    Inicio Sesión
-  </h3>
-  <Input
-    label="Correo electrónico"
-    type="email"
-    name="email"
-    disabled={isSubmitting}
-    error={hasSubmitted}
-    required
-    validations={[email]}
-  />
-  <Input
-    label="Contraseña"
-    type="password"
-    name="password"
-    disabled={isSubmitting}
-    error={hasSubmitted}
-    required
-  />
-
-  <GradientButton
-    disabled={isSubmitting}
-    color="green"
-    size="lg"
-    type="submit"
-    class="w-full1"
-  >
-    {#if isSubmitting}
-      <Spinner class="mr-3" color="white" size="4" />
-      Iniciando sesión...
-    {:else}
-      Iniciar sesión
-    {/if}
-  </GradientButton>
-
   <div class="flex items-start">
     <Checkbox>Recordar</Checkbox>
     <a

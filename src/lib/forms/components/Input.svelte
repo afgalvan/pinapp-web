@@ -1,27 +1,15 @@
 <script lang="ts">
-  import {
-    validators,
-    required as validateRequired,
-    type Validator,
-  } from 'svelte-use-form';
+  import type { LogicField } from '$lib/shared/models';
   import type { HTMLInputTypeAttribute } from 'svelte/elements';
-  import InputTemplate from './InputTemplate.svelte';
 
   let clazz = '';
   export { clazz as class };
 
   export let name: string;
   export let type: HTMLInputTypeAttribute = 'text';
-  export let value: any = undefined;
+  export let logicField: LogicField<any>;
   export let error = false;
   export let disabled = false;
-  export let label = '';
-  export let required = false;
-
-  export let validations: Validator[] = [];
-  if (required) {
-    validations.push(validateRequired);
-  }
 
   let computedClass = '';
 
@@ -33,26 +21,23 @@
   }
 </script>
 
-<InputTemplate {label} {error} {required}>
-  <input
-    {disabled}
-    {name}
-    class={computedClass}
-    bind:value
-    on:blur
-    on:change
-    on:click
-    on:contextmenu
-    on:focus
-    on:keydown
-    on:keypress
-    on:keyup
-    on:mouseover
-    on:mouseenter
-    on:mouseleave
-    on:paste
-    on:input
-    {...{ type }}
-    use:validators={validations}
-  />
-</InputTemplate>
+<input
+  {disabled}
+  {name}
+  class={computedClass}
+  bind:value={$logicField.value}
+  on:blur
+  on:change
+  on:click
+  on:contextmenu
+  on:focus
+  on:keydown
+  on:keypress
+  on:keyup
+  on:mouseover
+  on:mouseenter
+  on:mouseleave
+  on:paste
+  on:input
+  {...{ type }}
+/>
