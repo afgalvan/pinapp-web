@@ -15,7 +15,5 @@
     {/if}
     <slot />
   </Label>
-  {#if error}
-    <FieldError {error} />
-  {/if}
+  <FieldError {error} {label} />
 </div>

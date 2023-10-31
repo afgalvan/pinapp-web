@@ -3,7 +3,6 @@
   import Loading from '$lib/components/atomic/Loading.svelte';
   import Grid from '$lib/components/atomic/Grid.svelte';
   import { auth } from '$lib/shared';
-  import { Section } from 'flowbite-svelte-blocks';
   import { navigate, link } from 'svelte-navigator';
   import LoginForm from '../components/segments/LoginForm.svelte';
 
@@ -32,7 +31,7 @@
       </a>
     </div>
 
-    <GradientCard class="p-6 pt-10 pb-10">
+    <GradientCard class="p-0 pt-6 pb-8">
       <LoginForm />
     </GradientCard>
   </Grid>

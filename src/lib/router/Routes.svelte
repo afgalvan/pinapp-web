@@ -14,4 +14,9 @@
   this={() => import('../../app/dashboard/pages/Dashboard.svelte')}
   requiresAuth
 />
+<LazyRoute
+  path="/panel/inventory"
+  this={() => import('../../app/inventory/pages/Inventory.svelte')}
+  requiresAuth
+/>
 <Route component={Redirect} />

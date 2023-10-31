@@ -17,7 +17,7 @@
     let border = error
       ? 'focus:border-red-500 focus:ring-red-500 dark:focus:border-red-500 dark:focus:ring-red-500 border-red-500 dark:border-red-500'
       : 'focus:border-primary-500 focus:ring-primary-500 dark:focus:border-primary-500 dark:focus:ring-primary-500 border-gray-300 dark:border-gray-500';
-    computedClass = `${border} block w-full disabled:cursor-not-allowed disabled:opacity-50 p-2.5 bg-gray-50 text-gray-900 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 text-sm rounded-lg ${clazz}`;
+    computedClass = ` ${border} block w-full disabled:cursor-not-allowed disabled:opacity-50 p-2.5 bg-gray-50 text-gray-900 dark:bg-slate-950 dark:text-white dark:placeholder-gray-400 text-sm rounded-xl ${clazz}`;
   }
 </script>
 

@@ -2,13 +2,13 @@
   import { Alert } from 'flowbite-svelte';
   import { InfoCircleSolid } from 'flowbite-svelte-icons';
   import type { Writable } from 'svelte/store';
-  import { fade } from 'svelte/transition';
+  import { slide } from 'svelte/transition';
 
   export let message: Writable<string | undefined>;
 </script>
 
 {#if $message}
-  <div class="w-full flex justify-center" transition:fade={{ duration: 500 }}>
+  <div class="w-full flex justify-center" transition:slide={{ duration: 500 }}>
     <Alert
       on:close={() => message.set(undefined)}
       color="red"

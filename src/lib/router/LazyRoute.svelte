@@ -1,7 +1,7 @@
 <script lang="ts">
   import Lazy from './Lazy.svelte';
   import { Route } from 'svelte-navigator';
-  import { fly } from 'svelte/transition';
+  import { blur } from 'svelte/transition';
   import Redirect from './Redirect.svelte';
   import Loading from '$lib/components/atomic/Loading.svelte';
   import { auth } from '$lib/shared';
@@ -26,7 +26,7 @@
       <Loading />
     </svelte:fragment>
     <svelte:fragment slot="component" let:Component>
-      <div transition:fly={{ y: -200, duration: 500 }} class="h-full w-full">
+      <div transition:blur={{ duration: 400 }} class="h-full w-full">
         {#if !requiresAuth || isAuthenticated}
           <Component />
         {:else if loading}

@@ -12,8 +12,6 @@ export const login = async ({ email, password }: User) => {
 };
 
 export const oauthLogin = async ({ provider }: SignInWithOAuthCredentials) => {
-  console.log({ provider });
-
   const response = await supabase.auth.signInWithOAuth({ provider });
 
   if (response.error?.status && response.error?.status >= 300) {

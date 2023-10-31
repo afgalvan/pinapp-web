@@ -9,7 +9,7 @@
 </script>
 
 <div
-  class="border rounded-lg p-4 border-light-bd dark:border-dark-bd bg-light-card dark:bg-dark-card relative {clazz}"
+  class="border rounded-lg border-light-bd dark:border-dark-bd bg-light-card dark:bg-dark-card relative {clazz}"
 >
   {#if dotted}
     <Dots spreading={15} />

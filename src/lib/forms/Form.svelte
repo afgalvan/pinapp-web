@@ -1,17 +1,27 @@
 <script lang="ts" generics="T">
+  import { required } from 'svelte-forms/validators';
+
   import DynamicFormField from './components/DynamicFormField.svelte';
 
   import { GradientButton, Spinner } from 'flowbite-svelte';
 
-  import { form as buildForm } from 'svelte-forms';
+  import { form as buildForm, field } from 'svelte-forms';
 
   import ServerResponse from '$lib/components/atomic/ServerResponse.svelte';
   import { writable } from 'svelte/store';
   import type { FormField, LogicField } from '$lib/shared/models';
 
   export let formFields: FormField<T>[];
+  export let submitLabel: string;
+  export let columns: number = 1;
 
-  export let fields: LogicField<any>[];
+  const fields: LogicField<any>[] = formFields.map((f) => {
+    const validators = [
+      ...(f.required ? [required()] : []),
+      ...(f.validators ?? []),
+    ];
+    return field(f.name, f.defaultValue, validators);
+  });
 
   const form = buildForm(...fields);
 
@@ -48,31 +58,27 @@
 </script>
 
 <form class={clazz} on:submit={submit}>
-  <div class="grid gap-2">
-    {#each fields as field, i}
+  <div class="grid gap-2 md:grid-cols-{columns} grid-cols-1">
+    {#each fields as logicField, i}
       <DynamicFormField
         field={formFields[i]}
-        logicField={field}
+        {logicField}
         disabled={isSubmitting}
       />
     {/each}
   </div>
-  {#if $form.hasError('email.required')}
-    <div>Email is required</div>
-  {/if}
 
   <GradientButton
     disabled={isSubmitting}
     color="green"
-    size="lg"
     type="submit"
     class="w-full"
   >
     {#if isSubmitting}
       <Spinner class="mr-3" color="white" size="4" />
-      Iniciando sesión...
+      {submitLabel}...
     {:else}
-      Iniciar sesión
+      {submitLabel}
     {/if}
   </GradientButton>
   <slot {isSubmitting} {hasSubmitted} {startSubmission} />

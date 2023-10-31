@@ -12,12 +12,17 @@
   export { clazz as class };
 </script>
 
-<FieldTemplate label={field.label} required={field.required}>
+<FieldTemplate
+  label={field.label}
+  required={field.required}
+  error={$logicField.errors[0]}
+>
   {#if field.variant == 'input'}
     <Input
       {disabled}
       {logicField}
       class={clazz}
+      error={$logicField.errors.length > 0}
       type={field.type ?? 'text'}
       name={field.name}
     />
