@@ -23,6 +23,7 @@
   .grids {
     height: 100%;
     width: 100%;
+    overflow-y: scroll;
     background-size: 100px 100px;
     z-index: -2;
     background-position-y: -9px;

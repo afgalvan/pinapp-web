@@ -3,7 +3,6 @@ import type { Path } from './Path';
 import type { Validator } from 'svelte-forms';
 import type { Writable } from 'svelte/store';
 
-
 export interface FormField<TField> {
   name: Path<TField>;
   label: string;
@@ -20,6 +19,8 @@ export interface FormField<TField> {
   type?: HTMLInputTypeAttribute;
   validators?: Validator[];
   required?: boolean;
+  icon?: any;
+  rightIcon?: any;
 }
 
 export declare type Field<T> = {

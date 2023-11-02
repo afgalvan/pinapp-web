@@ -24,6 +24,7 @@
       class={clazz}
       error={$logicField.errors.length > 0}
       type={field.type ?? 'text'}
+      icon={field.icon}
       name={field.name}
     />
   {/if}

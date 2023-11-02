@@ -10,7 +10,9 @@
     <Header />
   </header>
 
-  <main class="bg-white dark:bg-slate-950 overflow-auto pt-24 content-center">
+  <main
+    class="bg-white dark:bg-slate-950 overflow-auto pt-[4.5rem] content-center"
+  >
     <Routes />
     <Footer />
   </main>

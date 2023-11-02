@@ -9,6 +9,8 @@
   import type { FormField } from '$lib/shared/models';
   import type { User } from '$app/login/models/User';
   import { email } from 'svelte-forms/validators';
+  import Email from '$lib/icons/Email.svelte';
+  import Lock from '$lib/icons/Lock.svelte';
 
   const onSucceed = async (data: any) => {
     if (data.user) {
@@ -24,6 +26,7 @@
       variant: 'input',
       required: true,
       validators: [email()],
+      icon: Email,
     },
     {
       name: 'password',
@@ -31,6 +34,7 @@
       type: 'password',
       variant: 'input',
       required: true,
+      icon: Lock,
     },
   ];
 </script>
@@ -54,8 +58,7 @@
   let:isSubmitting
   let:startSubmission
 >
-  <div class="flex items-start">
-    <Checkbox>Recordar</Checkbox>
+  <div class="flex items-end">
     <a
       href="/"
       class="ml-auto text-sm text-green-700 hover:underline dark:text-green-500"
@@ -64,10 +67,11 @@
     </a>
   </div>
 
-  <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700" />
+  <hr class="h-px bg-gray-200 border-0 dark:bg-gray-700" />
 
   <Button
     color="light"
+    size="lg"
     disabled={isSubmitting}
     on:click={async (e) => {
       startSubmission(e);

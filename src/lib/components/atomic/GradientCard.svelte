@@ -1,7 +1,7 @@
 <script>
-  import { Card } from 'flowbite-svelte';
   import Dots from './Dots.svelte';
 
+  export let center = false;
   export let dotted = false;
   export let color = 'rgba(120, 119, 198, 0.3)';
   let clazz = '';
@@ -9,7 +9,9 @@
 </script>
 
 <div
-  class="border rounded-lg border-light-bd dark:border-dark-bd bg-light-card dark:bg-dark-card relative {clazz}"
+  class="border rounded-lg border-light-bd dark:border-dark-bd bg-light-card dark:bg-dark-card relative {clazz} {center
+    ? 'grid place-content-center'
+    : ''}"
 >
   {#if dotted}
     <Dots spreading={15} />

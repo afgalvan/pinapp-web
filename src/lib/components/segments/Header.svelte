@@ -42,7 +42,11 @@
   color="form"
 >
   <div class="grid grid-cols-2">
-    <a class="grid place-content-center" href="/" use:link>
+    <a
+      class="grid place-content-center"
+      href={!user ? '/' : path === '/' ? '/panel/dashboard' : '/'}
+      use:link
+    >
       <img src="/favicon.svg" class="h-8" alt="Pinapp Logo" />
     </a>
     <span class="grid place-content-center mt-1">
@@ -62,7 +66,7 @@
         </svelte:fragment>
       </DarkMode>
     </div>
-    <NavUl {hidden}>
+    <NavUl ulClass="m-1" {hidden}>
       {#if path === '/' && !user}
         <NavLi>
           <a href="/auth/login" use:link>
@@ -77,34 +81,35 @@
       {/if}
       {#if user}
         <NavLi>
-          <Badge
-            class="mr-2 bg-indigo-900 text-indigo-300"
-            rounded
-            color="indigo">{user.email}</Badge
-          >
-          <GradientButton
-            pill
-            color="green"
-            on:click={async () => {
-              signingOut = true;
-              await signOut();
-              signingOut = false;
-            }}
-          >
-            {#if signingOut}
-              <Spinner class="mr-3" color="white" size="4" />
-              Cerrando sesión...
-            {:else}
-              <ArrowLeftToBracketOutline class="w-4 h-4 mr-2" />
-              Salir
-            {/if}
-          </GradientButton>
+          <div class="flex">
+            <Badge
+              class="mr-2 bg-indigo-900 text-indigo-300"
+              rounded
+              color="indigo">{user.email}</Badge
+            >
+            <GradientButton
+              size="sm"
+              pill
+              color="green"
+              on:click={async () => {
+                signingOut = true;
+                await signOut();
+                signingOut = false;
+              }}
+            >
+              {#if signingOut}
+                <Spinner class="mr-3" color="white" size="4" />
+                Cerrando sesión...
+              {:else}
+                <ArrowLeftToBracketOutline class="w-4 h-4 mr-2" />
+                Salir
+              {/if}
+            </GradientButton>
+          </div>
         </NavLi>
       {/if}
     </NavUl>
 
-    {#if path === '/'}
-      <NavHamburger on:click={toggle} />
-    {/if}
+    <NavHamburger on:click={toggle} />
   </div>
 </Navbar>

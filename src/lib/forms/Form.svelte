@@ -70,6 +70,7 @@
 
   <GradientButton
     disabled={isSubmitting}
+    size="lg"
     color="green"
     type="submit"
     class="w-full"

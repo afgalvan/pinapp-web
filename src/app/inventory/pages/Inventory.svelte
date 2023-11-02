@@ -3,6 +3,6 @@
   import InventoryForm from '../components/segments/InventoryForm.svelte';
 </script>
 
-<Grid>
+<Grid class="h-[80vh]">
   <InventoryForm />
 </Grid>

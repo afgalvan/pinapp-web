@@ -8,6 +8,7 @@
   export let name: string;
   export let type: HTMLInputTypeAttribute = 'text';
   export let logicField: LogicField<any>;
+  export let icon: any;
   export let error = false;
   export let disabled = false;
 
@@ -17,27 +18,37 @@
     let border = error
       ? 'focus:border-red-500 focus:ring-red-500 dark:focus:border-red-500 dark:focus:ring-red-500 border-red-500 dark:border-red-500'
       : 'focus:border-primary-500 focus:ring-primary-500 dark:focus:border-primary-500 dark:focus:ring-primary-500 border-gray-300 dark:border-gray-500';
-    computedClass = ` ${border} block w-full disabled:cursor-not-allowed disabled:opacity-50 p-2.5 bg-gray-50 text-gray-900 dark:bg-slate-950 dark:text-white dark:placeholder-gray-400 text-sm rounded-xl ${clazz}`;
+    computedClass = `border ${border} block w-full disabled:cursor-not-allowed disabled:opacity-50 p-2.5 bg-gray-50 text-gray-900 dark:bg-slate-950 dark:text-white dark:placeholder-gray-400 text-sm rounded-xl`;
   }
 </script>
 
-<input
-  {disabled}
-  {name}
-  class={computedClass}
-  bind:value={$logicField.value}
-  on:blur
-  on:change
-  on:click
-  on:contextmenu
-  on:focus
-  on:keydown
-  on:keypress
-  on:keyup
-  on:mouseover
-  on:mouseenter
-  on:mouseleave
-  on:paste
-  on:input
-  {...{ type }}
-/>
+<div
+  class="rounded-lg relative inline-flex h-14 w-full flex-col items-start justify-center gap-0 shadow-sm {computedClass}"
+  style="cursor: text;"
+>
+  <div class="box-border inline-flex h-full w-full items-center gap-1.5">
+    <svelte:component this={icon} />
+    <input
+      {disabled}
+      {name}
+      bind:value={$logicField.value}
+      on:blur
+      on:change
+      on:click
+      on:contextmenu
+      on:focus
+      on:keydown
+      on:keypress
+      on:keyup
+      on:mouseover
+      on:mouseenter
+      on:mouseleave
+      on:paste
+      on:input
+      {...{ type }}
+      class="border-none focus:border-none focus:ring-0 h-full w-full !bg-transparent font-normal outline-none {clazz}"
+      aria-label={name}
+    />
+    <slot name="rightIcon" />
+  </div>
+</div>
