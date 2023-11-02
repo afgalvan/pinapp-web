@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Eye from '$lib/icons/Eye.svelte';
+  import EyeSlash from '$lib/icons/EyeSlash.svelte';
   import type { LogicField } from '$lib/shared/models';
   import type { HTMLInputTypeAttribute } from 'svelte/elements';
 
@@ -8,10 +10,13 @@
   export let name: string;
   export let type: HTMLInputTypeAttribute = 'text';
   export let logicField: LogicField<any>;
-  export let icon: any;
+  export let icon: any = undefined;
+  export let rightIcon: any = undefined;
   export let error = false;
   export let disabled = false;
 
+  let internalType = type;
+  let isVisible = false;
   let computedClass = '';
 
   $: {
@@ -20,6 +25,11 @@
       : 'focus:border-primary-500 focus:ring-primary-500 dark:focus:border-primary-500 dark:focus:ring-primary-500 border-gray-300 dark:border-gray-500';
     computedClass = `border ${border} block w-full disabled:cursor-not-allowed disabled:opacity-50 p-2.5 bg-gray-50 text-gray-900 dark:bg-slate-950 dark:text-white dark:placeholder-gray-400 text-sm rounded-xl`;
   }
+
+  const toggleVisibility = () => {
+    isVisible = !isVisible;
+    type = isVisible ? 'text' : 'password';
+  };
 </script>
 
 <div
@@ -50,5 +60,20 @@
       aria-label={name}
     />
     <slot name="rightIcon" />
+    {#if internalType === 'password'}
+      <button
+        class="focus:outline-none"
+        type="button"
+        on:click={toggleVisibility}
+      >
+        {#if isVisible}
+          <EyeSlash />
+        {:else}
+          <Eye />
+        {/if}
+      </button>
+    {:else}
+      <svelte:component this={rightIcon} />
+    {/if}
   </div>
 </div>
