@@ -67,7 +67,7 @@
       </DarkMode>
     </div>
     <NavUl ulClass="m-1" {hidden}>
-      {#if path === '/' && !user}
+      {#if path !== '/auth/login' && !user}
         <NavLi>
           <a href="/auth/login" use:link>
             <SpotlightButton>

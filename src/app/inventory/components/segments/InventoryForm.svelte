@@ -38,7 +38,7 @@
   submitLabel="Guardar"
   formFields={fields}
   class="grid gap-6 p-8 pl-9 pr-9"
-  withErrorMessage
+  withServerMessage
   {onSucceed}
   {onSubmit}
 />

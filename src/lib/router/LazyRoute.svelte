@@ -5,6 +5,7 @@
   import Redirect from './Redirect.svelte';
   import Loading from '$lib/components/atomic/Loading.svelte';
   import { auth } from '$lib/shared';
+  // import { Breadcrumb, BreadcrumbItem } from 'flowbite-svelte';
 
   export let path: string;
   export let requiresAuth = false;
@@ -28,6 +29,9 @@
     <svelte:fragment slot="component" let:Component>
       <div transition:blur={{ duration: 400 }} class="h-full w-full">
         {#if !requiresAuth || isAuthenticated}
+          <!-- <Breadcrumb aria-label="Pinapp breadcrumb">
+            <BreadcrumbItem href="/">Dashboard</BreadcrumbItem>
+          </Breadcrumb> -->
           <Component />
         {:else if loading}
           <Loading />

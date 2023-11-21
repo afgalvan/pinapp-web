@@ -10,6 +10,10 @@
   path="/auth/login"
   this={() => import('../../app/login/pages/Login.svelte')}
 />
+<LazyRoute
+  path="/auth/forgot-password"
+  this={() => import('../../app/auth/pages/ForgotPassword.svelte')}
+/>
 <AppRoute>
   <LazyRoute
     path="dashboard"
@@ -17,7 +21,42 @@
     requiresAuth
   />
   <LazyRoute
-    path="inventory"
+    path="sales"
+    this={() => import('../../app/inventory/pages/Inventory.svelte')}
+    requiresAuth
+  />
+  <LazyRoute
+    path="inventory/materials"
+    this={() => import('../../app/inventory/pages/Inventory.svelte')}
+    requiresAuth
+  />
+  <LazyRoute
+    path="inventory/products"
+    this={() => import('../../app/inventory/pages/Inventory.svelte')}
+    requiresAuth
+  />
+  <LazyRoute
+    path="productions"
+    this={() => import('../../app/inventory/pages/Inventory.svelte')}
+    requiresAuth
+  />
+  <LazyRoute
+    path="production/recipes"
+    this={() => import('../../app/inventory/pages/Inventory.svelte')}
+    requiresAuth
+  />
+  <LazyRoute
+    path="config/employees"
+    this={() => import('../../app/inventory/pages/Inventory.svelte')}
+    requiresAuth
+  />
+  <LazyRoute
+    path="config/providers"
+    this={() => import('../../app/inventory/pages/Inventory.svelte')}
+    requiresAuth
+  />
+  <LazyRoute
+    path="config/units"
     this={() => import('../../app/inventory/pages/Inventory.svelte')}
     requiresAuth
   />

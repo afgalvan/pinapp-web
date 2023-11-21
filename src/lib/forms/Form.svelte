@@ -8,9 +8,13 @@
   import { form as buildForm, field } from 'svelte-forms';
 
   import ServerResponse from '$lib/components/atomic/ServerResponse.svelte';
-  import { writable } from 'svelte/store';
   import type { FormField, LogicField } from '$lib/shared/models';
 
+  let clazz = '';
+  export { clazz as class };
+  export let onSubmit: (formValues: T) => Promise<any> | any;
+  export let onSucceed: (formValues: any) => Promise<any> | any = () => {};
+  export let withServerMessage = false;
   export let formFields: FormField<T>[];
   export let submitLabel: string;
   export let columns: number = 1;
@@ -25,15 +29,8 @@
 
   const form = buildForm(...fields);
 
-  let clazz = '';
-  export { clazz as class };
-
-  export let onSubmit: (formValues: any) => Promise<any>;
-  export let onSucceed: (formValues: any) => Promise<any>;
-  export let withErrorMessage = false;
-
-  const responseMessage = writable<string | undefined>();
-
+  let responseMessage: string | undefined;
+  let responseError = false;
   let isSubmitting = false;
   let hasSubmitted = false;
 
@@ -49,15 +46,16 @@
     if (!$form.valid) return;
 
     isSubmitting = true;
-    const data = await onSubmit($form.summary);
-    responseMessage.set(data.message);
+    const data = await onSubmit($form.summary as any);
+    responseMessage = data?.message;
+    responseError = data?.error;
     isSubmitting = false;
     hasSubmitted = true;
-    onSucceed(data);
+    onSucceed && onSucceed(data);
   };
 </script>
 
-<form class={clazz} on:submit={submit}>
+<form class="text-left {clazz}" on:submit={submit}>
   <div class="grid gap-2 md:grid-cols-{columns} grid-cols-1">
     {#each fields as logicField, i}
       <DynamicFormField
@@ -83,5 +81,7 @@
     {/if}
   </GradientButton>
   <slot {isSubmitting} {hasSubmitted} {startSubmission} />
-  {#if withErrorMessage} <ServerResponse message={responseMessage} /> {/if}
+  {#if withServerMessage}
+    <ServerResponse message={responseMessage} error={responseError} />
+  {/if}
 </form>

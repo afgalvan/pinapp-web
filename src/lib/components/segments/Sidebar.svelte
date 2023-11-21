@@ -1,14 +1,73 @@
 <script lang="ts">
+  import type { MenuItem } from '$lib/shared';
+  import {
+    ChartPieOutline,
+    ArchiveOutline,
+    CogOutline,
+    ChartMixedDollarSolid,
+    StoreOutline,
+  } from 'flowbite-svelte-icons';
   import {
     Sidebar,
     SidebarCta,
+    SidebarDropdownWrapper,
     SidebarGroup,
-    SidebarItem,
     SidebarWrapper,
   } from 'flowbite-svelte';
-  import { Link, useLocation } from 'svelte-navigator';
+  import Item from '$lib/components/atomic/MenuItem.svelte';
+  import { useLocation } from 'svelte-navigator';
 
   const location = useLocation();
+
+  const menuItems: MenuItem[] = [
+    {
+      label: 'Dashboard',
+      href: '/panel/dashboard',
+      icon: ChartPieOutline,
+    },
+    {
+      label: 'Ventas',
+      href: '/panel/sales',
+      icon: ChartMixedDollarSolid,
+    },
+    {
+      label: 'Inventario',
+      href: '/panel/inventory',
+      icon: ArchiveOutline,
+      children: [
+        { label: 'Materia Prima', href: '/panel/inventory/materials' },
+        { label: 'Productos', href: '/panel/inventory/products' },
+      ],
+    },
+    {
+      label: 'Producción',
+      href: '/panel/production',
+      icon: StoreOutline,
+      children: [
+        { label: 'Producciones', href: '/panel/productions' },
+        { label: 'Recetas', href: '/panel/production/recipes' },
+      ],
+    },
+    {
+      label: 'Parametros',
+      href: '/panel/config',
+      icon: CogOutline,
+      children: [
+        {
+          label: 'Empleados',
+          href: '/panel/config/employees',
+        },
+        {
+          label: 'Proveedores',
+          href: '/panel/config/providers',
+        },
+        {
+          label: 'Unidades de Medida',
+          href: '/panel/config/units',
+        },
+      ],
+    },
+  ];
 
   $: activeUrl = $location.pathname;
 </script>
@@ -22,38 +81,23 @@
     class="h-full min-h-[80vh] max-h-screen overflow-auto border border-light-bd dark:border-dark-bd bg-light-card dark:bg-dark-card flex flex-col justify-between"
   >
     <SidebarGroup ulClass="grid gap-2">
-      <Link to="/panel/dashboard">
-        <SidebarItem label="Dashboard" href="/panel/dashboard">
-          <svelte:fragment slot="icon">
-            <svg
-              aria-hidden="true"
-              class="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-              ><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" /><path
-                d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"
+      {#each menuItems as item}
+        {#if item.children}
+          <SidebarDropdownWrapper label={item.label}>
+            <svelte:fragment slot="icon">
+              <svelte:component
+                this={item.icon}
+                class="w-5 h-5 text-gray-400 transition duration-75 dark:text-gray-400"
               />
-            </svg>
-          </svelte:fragment>
-        </SidebarItem>
-      </Link>
-      <Link to="/panel/inventory">
-        <SidebarItem label="Inventario" href="/panel/inventory">
-          <svelte:fragment slot="icon">
-            <svg
-              aria-hidden="true"
-              class="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-              ><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" /><path
-                d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"
-              />
-            </svg>
-          </svelte:fragment>
-        </SidebarItem>
-      </Link>
+            </svelte:fragment>
+            {#each item.children as child}
+              <Item item={child} />
+            {/each}
+          </SidebarDropdownWrapper>
+        {:else}
+          <Item {item} />
+        {/if}
+      {/each}
     </SidebarGroup>
 
     <SidebarGroup class="relative">

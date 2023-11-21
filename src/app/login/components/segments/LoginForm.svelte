@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Checkbox, Button } from 'flowbite-svelte';
+  import { Button } from 'flowbite-svelte';
   import { GoogleSolid } from 'flowbite-svelte-icons';
-  import { navigate } from 'svelte-navigator';
+  import { link, navigate } from 'svelte-navigator';
 
   import { login, oauthLogin } from '../../services/login';
   import Form from '$lib/forms/Form.svelte';
@@ -11,13 +11,6 @@
   import { email } from 'svelte-forms/validators';
   import Email from '$lib/icons/Email.svelte';
   import Lock from '$lib/icons/Lock.svelte';
-
-  const onSucceed = async (data: any) => {
-    if (data.user) {
-      authenticate(data.user);
-      navigate('/panel/dashboard');
-    }
-  };
 
   const fields: FormField<User>[] = [
     {
@@ -37,6 +30,13 @@
       icon: Lock,
     },
   ];
+
+  const onSucceed = async (data: any) => {
+    if (data.user) {
+      authenticate(data.user);
+      navigate('/panel/dashboard');
+    }
+  };
 </script>
 
 <div class="pl-9 pr-9">
@@ -54,16 +54,17 @@
   class="grid gap-6 w-[560px] p-8 pl-9 pr-9"
   onSubmit={login}
   {onSucceed}
-  withErrorMessage
+  withServerMessage
   let:isSubmitting
   let:startSubmission
 >
   <div class="flex items-end">
     <a
-      href="/"
+      use:link
+      href="/auth/forgot-password"
       class="ml-auto text-sm text-green-700 hover:underline dark:text-green-500"
     >
-      Olvidaste tu contraseña?
+      ¿Olvidaste tu contraseña?
     </a>
   </div>
 
