@@ -27,6 +27,22 @@
       required: true,
       validators: [min(1)],
     },
+    {
+      name: 'id',
+      label: 'Stock',
+      variant: 'input',
+      type: 'number',
+      required: true,
+      validators: [min(1)],
+    },
+    {
+      name: 'test',
+      label: 'Stock',
+      variant: 'input',
+      type: 'number',
+      required: true,
+      validators: [min(1)],
+    },
   ];
 </script>
 
