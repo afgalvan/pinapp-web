@@ -2,6 +2,7 @@
   import Form from '$lib/forms/Form.svelte';
   import type { FormField } from '$lib/shared/models';
   import type { Inventory } from '$app/inventory/models/Inventory';
+  import { min } from 'svelte-forms/validators';
 
   const onSucceed = async (data: any) => {
     console.log(data);
@@ -20,15 +21,11 @@
     },
     {
       name: 'stock',
-      label: 'Nombre',
+      label: 'Stock',
       variant: 'input',
+      type: 'number',
       required: true,
-    },
-    {
-      name: 'id',
-      label: 'Nombre',
-      variant: 'input',
-      required: true,
+      validators: [min(1)],
     },
   ];
 </script>

@@ -11,6 +11,10 @@
       {label} es requerido
     {:else if error === 'not_an_email'}
       El correo electrónico es inválido
+    {:else if error === 'min'}
+      {label} debe ser mayor
+    {:else if error === 'max'}
+      {label} debe ser menor
     {/if}
   </p>
 {/if}
