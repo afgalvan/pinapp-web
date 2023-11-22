@@ -55,7 +55,7 @@
   };
 </script>
 
-<form class="text-left {clazz}" on:submit={submit}>
+<form class="text-left {clazz}" on:submit|preventDefault={submit}>
   <div class="grid gap-2 md:grid-cols-{columns} grid-cols-1">
     {#each fields as logicField, i}
       <DynamicFormField
