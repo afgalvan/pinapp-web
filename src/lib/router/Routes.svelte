@@ -47,7 +47,7 @@
   />
   <LazyRoute
     path="config/employees"
-    this={() => import('../../app/inventory/pages/Inventory.svelte')}
+    this={() => import('../../app/employees/pages/Employees.svelte')}
     requiresAuth
   />
   <LazyRoute
