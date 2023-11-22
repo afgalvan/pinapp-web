@@ -57,7 +57,7 @@
   />
   <LazyRoute
     path="config/units"
-    this={() => import('../../app/inventory/pages/Inventory.svelte')}
+    this={() => import('../../app/units/pages/Units.svelte')}
     requiresAuth
   />
 </AppRoute>
