@@ -53,10 +53,14 @@
     hasSubmitted = true;
     onSucceed && onSucceed(data);
   };
+
+  let cols = '';
+
+  $: cols = `md:grid-cols-${columns}`;
 </script>
 
-<form class="text-left {clazz}" on:submit|preventDefault={submit}>
-  <div class="grid gap-2 md:grid-cols-{columns} grid-cols-1">
+<form class="text-left {clazz}" on:submit={submit}>
+  <div class="grid gap-2 {cols} grid-cols-1">
     {#each fields as logicField, i}
       <DynamicFormField
         field={formFields[i]}

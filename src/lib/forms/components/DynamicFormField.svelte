@@ -1,4 +1,6 @@
 <script lang="ts" generics="T = any">
+  import Autocomplete from '$lib/forms/components/Autocomplete.svelte';
+
   import FieldTemplate from './FieldTemplate.svelte';
   import Input from './Input.svelte';
 
@@ -27,5 +29,7 @@
       icon={field.icon}
       name={field.name}
     />
+  {:else if field.variant == 'autocomplete'}
+    <Autocomplete {disabled} {logicField} class={clazz} />
   {/if}
 </FieldTemplate>

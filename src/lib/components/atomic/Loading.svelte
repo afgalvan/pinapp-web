@@ -3,7 +3,7 @@
 </script>
 
 <div
-  class="w-screen h-[90vh] grid items-center justify-center justify-items-center"
+  class="w-full h-[90vh] grid items-center justify-center justify-items-center"
 >
   <Spinner />
 </div>

@@ -37,9 +37,8 @@
     },
     {
       name: 'test',
-      label: 'Stock',
-      variant: 'input',
-      type: 'number',
+      label: 'Autocomplete',
+      variant: 'autocomplete',
       required: true,
       validators: [min(1)],
     },
