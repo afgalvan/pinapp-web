@@ -1,29 +1,35 @@
 <script lang="ts" generics="T">
+  import type { Readable } from 'svelte/motion';
+  import type { Writable } from 'svelte/store';
+
   import { required } from 'svelte-forms/validators';
 
   import DynamicFormField from './components/DynamicFormField.svelte';
 
   import { GradientButton, Spinner } from 'flowbite-svelte';
 
-  import { form as buildForm, field } from 'svelte-forms';
+  import { form as buildForm, field, type Validator } from 'svelte-forms';
 
   import ServerResponse from '$lib/components/atomic/ServerResponse.svelte';
-  import type { FormField, LogicField } from '$lib/shared/models';
+  import type { Field, FormField, LogicField } from '$lib/shared/models';
 
   let clazz = '';
   export { clazz as class };
   export let onSubmit: (formValues: T) => Promise<any> | any;
   export let onSucceed: (formValues: any) => Promise<any> | any = () => {};
   export let withServerMessage = false;
+  export let withReset = true;
   export let formFields: FormField<T>[];
   export let submitLabel: string;
-  export let columns: number = 1;
+  export let columns = 'md:grid-cols-1';
+  let autocomplete: Writable<Field<any>> | Readable<Field<any>>;
 
   const fields: LogicField<any>[] = formFields.map((f) => {
-    const validators = [
-      ...(f.required ? [required()] : []),
-      ...(f.validators ?? []),
-    ];
+    let validators: Validator[] = [];
+    if (f.required) {
+      validators.push(required());
+    }
+    validators = [...validators, ...(f.validators ?? [])];
     return field(f.name, f.defaultValue, validators);
   });
 
@@ -41,6 +47,19 @@
 
   const submit = async (e: Event) => {
     e.preventDefault();
+
+    Object.keys($form.summary).forEach((field: string) => {
+      // @ts-ignore
+      if (typeof $form.summary[field]?.value !== 'string') return;
+      // @ts-ignore
+      const isInvalid = $form.summary[field].value?.trim() === '';
+      if (isInvalid) {
+        // @ts-ignore
+        autocomplete = form.getField(field);
+        $autocomplete.value = null;
+      }
+    });
+
     await form.validate();
 
     if (!$form.valid) return;
@@ -51,16 +70,13 @@
     responseError = data?.error;
     isSubmitting = false;
     hasSubmitted = true;
+    withReset && form.reset();
     onSucceed && onSucceed(data);
   };
-
-  let cols = '';
-
-  $: cols = `md:grid-cols-${columns}`;
 </script>
 
 <form class="text-left {clazz}" on:submit={submit}>
-  <div class="grid gap-2 {cols} grid-cols-1">
+  <div class="grid gap-2 {columns} grid-cols-1">
     {#each fields as logicField, i}
       <DynamicFormField
         field={formFields[i]}

@@ -60,5 +60,10 @@
     this={() => import('../../app/units/pages/Units.svelte')}
     requiresAuth
   />
+  <LazyRoute
+    path="config/users"
+    this={() => import('../../app/users/pages/Users.svelte')}
+    requiresAuth
+  />
 </AppRoute>
 <Route component={Redirect} />

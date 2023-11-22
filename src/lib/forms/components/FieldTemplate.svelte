@@ -8,7 +8,7 @@
 </script>
 
 <div class="flex flex-col mb-2">
-  <Label class="space-y-2" color={error ? 'red' : 'gray'}>
+  <Label class="mb-2" color={error ? 'red' : 'gray'}>
     {label}
     {#if required}
       <span class="text-red-600">*</span>

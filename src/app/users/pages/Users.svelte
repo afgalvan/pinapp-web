@@ -16,21 +16,24 @@
     EditOutline,
   } from 'flowbite-svelte-icons';
   import Searchbar from '$lib/components/atomic/Searchbar.svelte';
-  import type { Supplier } from '../models/supplier';
-  import { getProviders } from '../services/provider';
-  import ProviderModalForm from '../components/ProviderModalForm.svelte';
+  import type { User } from '../models/user';
+  import { getUsers } from '../services/users-service';
+  import UserModalForm from '../components/UserForm.svelte';
 
-  let paginationData: Supplier[] = [];
-  let totalProviders = 0;
+  let paginationData: User[] = [];
+  let totalUsers = 0;
   let searchTerm = '';
 
-  $: getProviders().then((data) => {
-    paginationData = data;
-    totalProviders = paginationData.length;
+  onMount(() => {
+    getUsers().then((data) => {
+      paginationData = data;
+      totalUsers = paginationData.length;
+    });
+    renderPagination(paginationData.length);
   });
 
   let currentPosition = 0;
-  const providersPerPage = 6;
+  const usersPerPage = 6;
   const showPage = 5;
   let totalPages = 0;
   let pagesToShow: any[] = [];
@@ -38,30 +41,30 @@
   let endPage: number;
 
   const updateDataAndPagination = () => {
-    const currentPageProviders = paginationData.slice(
+    const currentPageUsers = paginationData.slice(
       currentPosition,
-      currentPosition + providersPerPage
+      currentPosition + usersPerPage
     );
-    renderPagination(currentPageProviders.length);
+    renderPagination(currentPageUsers.length);
   };
 
   $: loadNextPage = () => {
-    if (currentPosition + providersPerPage < paginationData.length) {
-      currentPosition += providersPerPage;
+    if (currentPosition + usersPerPage < paginationData.length) {
+      currentPosition += usersPerPage;
       updateDataAndPagination();
     }
   };
 
   const loadPreviousPage = () => {
-    if (currentPosition - providersPerPage >= 0) {
-      currentPosition -= providersPerPage;
+    if (currentPosition - usersPerPage >= 0) {
+      currentPosition -= usersPerPage;
       updateDataAndPagination();
     }
   };
 
-  const renderPagination = (totalProviders: number) => {
-    totalPages = Math.ceil(paginationData.length / providersPerPage);
-    const currentPage = Math.ceil((currentPosition + 1) / providersPerPage);
+  const renderPagination = (totalUsers: number) => {
+    totalPages = Math.ceil(paginationData.length / usersPerPage);
+    const currentPage = Math.ceil((currentPosition + 1) / usersPerPage);
 
     startPage = currentPage - Math.floor(showPage / 2);
     startPage = Math.max(1, startPage);
@@ -74,56 +77,43 @@
   };
 
   const goToPage = (pageNumber: number) => {
-    currentPosition = (pageNumber - 1) * providersPerPage;
+    currentPosition = (pageNumber - 1) * usersPerPage;
     updateDataAndPagination();
   };
 
   $: startRange = currentPosition + 1;
-  $: endRange = Math.min(currentPosition + providersPerPage, totalProviders);
+  $: endRange = Math.min(currentPosition + usersPerPage, totalUsers);
 
-  $: currentPageProviders = paginationData.slice(
+  $: currentPageUsers = paginationData.slice(
     currentPosition,
-    currentPosition + providersPerPage
+    currentPosition + usersPerPage
   );
 
-  $: filteredProviders = paginationData.filter(
-    (provider) =>
-      provider.name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+  $: filteredUsers = paginationData.filter(
+    (user) => user.email.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
   );
-
-  onMount(() => {
-    renderPagination(paginationData.length);
-  });
 </script>
 
 <div class="mx-5 flex flex-col gap-5">
   <div class="flex justify-between">
-    <Searchbar placeholder="Buscar proveedor" bind:searchString={searchTerm} />
-    <ProviderModalForm />
+    <Searchbar placeholder="Buscar usuario" bind:searchString={searchTerm} />
+    <UserModalForm />
   </div>
 
   <Table hoverable shadow>
     <TableHead>
       <TableHeadCell padding="px-4 py-3" scope="col">#</TableHeadCell>
-      <TableHeadCell padding="px-4 py-3" scope="col">Nombre</TableHeadCell>
-      <TableHeadCell padding="px-4 py-3" scope="col">Telefono</TableHeadCell>
-      <TableHeadCell padding="px-4 py-3" scope="col">Estado</TableHeadCell>
+      <TableHeadCell padding="px-4 py-3" scope="col">
+        Correo Electrónico
+      </TableHeadCell>
       <TableHeadCell padding="px-4 py-3" scope="col"></TableHeadCell>
     </TableHead>
     <TableBody>
       {#if searchTerm !== ''}
-        {#each filteredProviders as provider}
+        {#each filteredUsers as user, idx}
           <TableBodyRow>
-            <TableBodyCell tdClass="px-4 py-3">{provider.id}</TableBodyCell>
-            <TableBodyCell tdClass="px-4 py-3">{provider.name}</TableBodyCell>
-            <TableBodyCell tdClass="px-4 py-3">{provider.phone}</TableBodyCell>
-            <TableBodyCell tdClass="px-4 py-3"
-              >{#if provider.active}
-                Activo
-              {:else}
-                Inactivo
-              {/if}
-            </TableBodyCell>
+            <TableBodyCell tdClass="px-4 py-3">{idx + 1}</TableBodyCell>
+            <TableBodyCell tdClass="px-4 py-3">{user.email}</TableBodyCell>
             <TableBodyCell tdClass="px-4 py-3">
               <Button color="purple" outline pill class="!p-2" size="sm">
                 <EditOutline class="h-3.5 w-3.5" />
@@ -132,18 +122,10 @@
           </TableBodyRow>
         {/each}
       {:else}
-        {#each currentPageProviders as provider}
+        {#each currentPageUsers as user, idx}
           <TableBodyRow>
-            <TableBodyCell tdClass="px-4 py-3">{provider.id}</TableBodyCell>
-            <TableBodyCell tdClass="px-4 py-3">{provider.name}</TableBodyCell>
-            <TableBodyCell tdClass="px-4 py-3">{provider.phone}</TableBodyCell>
-            <TableBodyCell tdClass="px-4 py-3"
-              >{#if provider.active}
-                Activo
-              {:else}
-                Inactivo
-              {/if}</TableBodyCell
-            >
+            <TableBodyCell tdClass="px-4 py-3">{idx + 1}</TableBodyCell>
+            <TableBodyCell tdClass="px-4 py-3">{user.email}</TableBodyCell>
             <TableBodyCell tdClass="px-4 py-3">
               <Button color="purple" outline pill class="!p-2" size="sm">
                 <EditOutline class="h-3.5 w-3.5" />
@@ -165,7 +147,7 @@
       >
       de
       <span class="font-semibold text-gray-900 dark:text-white"
-        >{totalProviders}</span
+        >{totalUsers}</span
       >
     </span>
     <ButtonGroup>

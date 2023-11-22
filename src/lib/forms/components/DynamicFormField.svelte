@@ -30,6 +30,11 @@
       name={field.name}
     />
   {:else if field.variant == 'autocomplete'}
-    <Autocomplete {disabled} {logicField} class={clazz} />
+    <Autocomplete
+      {disabled}
+      {logicField}
+      name={field.name}
+      error={$logicField.errors.length > 0}
+    />
   {/if}
 </FieldTemplate>

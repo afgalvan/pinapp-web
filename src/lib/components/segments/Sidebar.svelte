@@ -65,6 +65,10 @@
           label: 'Unidades de Medida',
           href: '/panel/config/units',
         },
+        {
+          label: 'Usuarios',
+          href: '/panel/config/users',
+        },
       ],
     },
   ];

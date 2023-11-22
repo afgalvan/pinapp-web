@@ -2,15 +2,12 @@
   import Form from '$lib/forms/Form.svelte';
   import type { FormField } from '$lib/shared/models';
   import type { Inventory } from '$app/inventory/models/Inventory';
-  import { min } from 'svelte-forms/validators';
+  import { min } from '$lib/shared';
+  import { GradientButton, Modal } from 'flowbite-svelte';
+  import { createInventory } from '$app/inventory/services/inventory-service';
+  import { PlusSolid } from 'flowbite-svelte-icons';
 
-  const onSucceed = async (data: any) => {
-    console.log(data);
-  };
-
-  const onSubmit = async (data: any) => {
-    console.log(data);
-  };
+  let clickOutsideModal = false;
 
   const fields: FormField<Inventory>[] = [
     {
@@ -20,7 +17,7 @@
       required: true,
     },
     {
-      name: 'stock',
+      name: 'stock_quantity',
       label: 'Stock',
       variant: 'input',
       type: 'number',
@@ -28,29 +25,31 @@
       validators: [min(1)],
     },
     {
-      name: 'id',
-      label: 'Stock',
-      variant: 'input',
-      type: 'number',
-      required: true,
-      validators: [min(1)],
-    },
-    {
-      name: 'test',
-      label: 'Autocomplete',
+      name: 'units_of_measures',
+      label: 'Unidad',
       variant: 'autocomplete',
       required: true,
-      validators: [min(1)],
+    },
+    {
+      name: 'providers',
+      label: 'Proveedor',
+      variant: 'autocomplete',
+      required: true,
     },
   ];
 </script>
 
-<Form
-  columns={3}
-  submitLabel="Guardar"
-  formFields={fields}
-  class="grid gap-6 p-8 pl-9 pr-9"
-  withServerMessage
-  {onSucceed}
-  {onSubmit}
-/>
+<GradientButton color="green" on:click={() => (clickOutsideModal = true)}>
+  <PlusSolid class="h-3.5 w-3.5 mr-2" />Agregar nuevo material
+</GradientButton>
+
+<Modal size="xl" title="Registrar en Inventario" bind:open={clickOutsideModal}>
+  <Form
+    columns="md:grid-cols-2"
+    submitLabel="Guardar"
+    formFields={fields}
+    class="grid gap-6 p-8 pl-9 pr-9"
+    withServerMessage
+    onSubmit={createInventory}
+  />
+</Modal>

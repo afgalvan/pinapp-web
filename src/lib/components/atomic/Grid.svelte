@@ -6,7 +6,7 @@
 </script>
 
 <div class={clazz}>
-  <section class="grids {center ? 'grid place-content-center' : ''}">
+  <section class="grids{center ? ' grid place-content-center' : ''}">
     <slot />
   </section>
 </div>
@@ -25,23 +25,6 @@
     width: 100%;
     overflow-y: scroll;
     background-size: 100px 100px;
-    z-index: -2;
     background-position-y: -9px;
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      transparent,
-      4%,
-      white,
-      96%,
-      transparent
-    );
-    mask-image: linear-gradient(
-      to bottom,
-      transparent,
-      6%,
-      white,
-      96%,
-      transparent
-    );
   }
 </style>

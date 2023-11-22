@@ -55,6 +55,7 @@
   onSubmit={login}
   {onSucceed}
   withServerMessage
+  withReset={false}
   let:isSubmitting
   let:startSubmission
 >

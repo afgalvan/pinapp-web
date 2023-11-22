@@ -13,13 +13,14 @@
   import {
     ChevronRightOutline,
     ChevronLeftOutline,
+    EditOutline,
   } from 'flowbite-svelte-icons';
   import Searchbar from '$lib/components/atomic/Searchbar.svelte';
-  import type { Units } from '../models/units';
+  import type { Unit } from '../models/unit';
   import { getUnits } from '../services/units';
   import UnitModalForm from '../components/UnitModalForm.svelte';
 
-  let paginationData: Units[] = [];
+  let paginationData: Unit[] = [];
   let totalUnits = 0;
   let searchTerm = '';
 
@@ -96,24 +97,25 @@
 
 <div class="mx-5 flex flex-col gap-5">
   <div class="flex justify-between">
-    <Searchbar
-      placeholder="Buscar distribuidor"
-      bind:searchString={searchTerm}
-    />
+    <Searchbar placeholder="Buscar unidad" bind:searchString={searchTerm} />
     <UnitModalForm />
   </div>
 
-  <Table hoverable={true}>
+  <Table hoverable shadow>
     <TableHead>
+      <TableHeadCell padding="px-4 py-3" scope="col">#</TableHeadCell>
       <TableHeadCell padding="px-4 py-3" scope="col">Nombre</TableHeadCell>
-      <TableHeadCell padding="px-4 py-3" scope="col">Nombre largo</TableHeadCell
-      >
-      <TableHeadCell padding="px-4 py-3" scope="col">Activo</TableHeadCell>
+      <TableHeadCell padding="px-4 py-3" scope="col">
+        Nombre completo
+      </TableHeadCell>
+      <TableHeadCell padding="px-4 py-3" scope="col">Estado</TableHeadCell>
+      <TableHeadCell padding="px-4 py-3" scope="col"></TableHeadCell>
     </TableHead>
     <TableBody>
       {#if searchTerm !== ''}
         {#each filteredUnits as unit}
           <TableBodyRow>
+            <TableBodyCell tdClass="px-4 py-3">{unit.id}</TableBodyCell>
             <TableBodyCell tdClass="px-4 py-3">{unit.short_name}</TableBodyCell>
             <TableBodyCell tdClass="px-4 py-3">{unit.large_name}</TableBodyCell>
             <TableBodyCell tdClass="px-4 py-3"
@@ -123,11 +125,17 @@
                 Inactivo
               {/if}
             </TableBodyCell>
+            <TableBodyCell tdClass="px-4 py-3">
+              <Button color="purple" outline pill class="!p-2" size="sm">
+                <EditOutline class="h-3.5 w-3.5" />
+              </Button>
+            </TableBodyCell>
           </TableBodyRow>
         {/each}
       {:else}
         {#each currentPageUnits as unit}
           <TableBodyRow>
+            <TableBodyCell tdClass="px-4 py-3">{unit.id}</TableBodyCell>
             <TableBodyCell tdClass="px-4 py-3">{unit.short_name}</TableBodyCell>
             <TableBodyCell tdClass="px-4 py-3">{unit.large_name}</TableBodyCell>
             <TableBodyCell tdClass="px-4 py-3"
@@ -137,6 +145,11 @@
                 Inactivo
               {/if}</TableBodyCell
             >
+            <TableBodyCell tdClass="px-4 py-3">
+              <Button color="purple" outline pill class="!p-2" size="sm">
+                <EditOutline class="h-3.5 w-3.5" />
+              </Button>
+            </TableBodyCell>
           </TableBodyRow>
         {/each}
       {/if}
@@ -147,11 +160,11 @@
     aria-label="Table navigation"
   >
     <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-      Showing
+      Mostrando
       <span class="font-semibold text-gray-900 dark:text-white"
         >{startRange}-{endRange}</span
       >
-      of
+      de
       <span class="font-semibold text-gray-900 dark:text-white"
         >{totalUnits}</span
       >

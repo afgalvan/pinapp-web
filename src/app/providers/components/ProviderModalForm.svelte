@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { FormField } from '$lib/shared';
-  import { Button, Modal } from 'flowbite-svelte';
+  import { GradientButton, Modal } from 'flowbite-svelte';
   import Form from '$lib/forms/Form.svelte';
   import { PlusSolid } from 'flowbite-svelte-icons';
   import type { Supplier } from '../models/supplier';
@@ -11,6 +11,7 @@
   const onSubmit = async (data: Supplier) => {
     createProvider(data);
   };
+
   const fields: FormField<Supplier>[] = [
     {
       name: 'name',
@@ -24,18 +25,18 @@
       label: 'Telefono',
       variant: 'input',
       type: 'number',
-      required: false,
+      required: true,
     },
   ];
 </script>
 
-<Button on:click={() => (clickOutsideModal = true)}>
-  <PlusSolid class="h-3.5 w-3.5 mr-2" />Agregar empleado
-</Button>
+<GradientButton color="green" on:click={() => (clickOutsideModal = true)}>
+  <PlusSolid class="h-3.5 w-3.5 mr-2" />Agregar proveedor
+</GradientButton>
 
-<Modal title="Registrar distribuidor" bind:open={clickOutsideModal}>
+<Modal title="Registrar proveedor" bind:open={clickOutsideModal}>
   <Form
-    columns={1}
+    columns="md:grid-cols-2"
     submitLabel="Registrar"
     formFields={fields}
     class="grid gap-6 p-8 pl-9 pr-9"

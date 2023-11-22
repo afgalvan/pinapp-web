@@ -2,6 +2,8 @@
   import type { Employee } from '../models/employee';
   import { getEmployees } from '../services/employee';
   import { onMount } from 'svelte';
+  import { EditOutline } from 'flowbite-svelte-icons';
+
   import {
     Table,
     TableBody,
@@ -102,17 +104,24 @@
     <EmployeeForm />
   </div>
 
-  <Table hoverable={true}>
+  <Table hoverable={true} shadow>
     <TableHead>
+      <TableHeadCell padding="px-4 py-3" scope="col">#</TableHeadCell>
+      <TableHeadCell padding="px-4 py-3" scope="col">Cédula</TableHeadCell>
       <TableHeadCell padding="px-4 py-3" scope="col">Nombre</TableHeadCell>
       <TableHeadCell padding="px-4 py-3" scope="col">Apellido</TableHeadCell>
-      <TableHeadCell padding="px-4 py-3" scope="col">Telefono</TableHeadCell>
-      <TableHeadCell padding="px-4 py-3" scope="col">Activo</TableHeadCell>
+      <TableHeadCell padding="px-4 py-3" scope="col">Teléfono</TableHeadCell>
+      <TableHeadCell padding="px-4 py-3" scope="col">Estado</TableHeadCell>
+      <TableHeadCell padding="px-4 py-3" scope="col"></TableHeadCell>
     </TableHead>
     <TableBody>
       {#if searchTerm !== ''}
         {#each filteredEmployees as employee}
           <TableBodyRow>
+            <TableBodyCell tdClass="px-4 py-3">{employee.id}</TableBodyCell>
+            <TableBodyCell tdClass="px-4 py-3">
+              {employee.identification}
+            </TableBodyCell>
             <TableBodyCell tdClass="px-4 py-3">{employee.name}</TableBodyCell>
             <TableBodyCell tdClass="px-4 py-3"
               >{employee.last_name}</TableBodyCell
@@ -125,11 +134,20 @@
                 Inactivo
               {/if}
             </TableBodyCell>
+            <TableBodyCell tdClass="px-4 py-3">
+              <Button color="purple" outline pill class="!p-2" size="sm">
+                <EditOutline class="h-3.5 w-3.5" />
+              </Button>
+            </TableBodyCell>
           </TableBodyRow>
         {/each}
       {:else}
         {#each currentPageEmployees as employee}
           <TableBodyRow>
+            <TableBodyCell tdClass="px-4 py-3">{employee.id}</TableBodyCell>
+            <TableBodyCell tdClass="px-4 py-3">
+              {employee.identification}
+            </TableBodyCell>
             <TableBodyCell tdClass="px-4 py-3">{employee.name}</TableBodyCell>
             <TableBodyCell tdClass="px-4 py-3"
               >{employee.last_name}</TableBodyCell
@@ -140,8 +158,13 @@
                 Activo
               {:else}
                 Inactivo
-              {/if}</TableBodyCell
-            >
+              {/if}
+            </TableBodyCell>
+            <TableBodyCell tdClass="px-4 py-3">
+              <Button color="purple" outline pill class="!p-2" size="sm">
+                <EditOutline class="h-3.5 w-3.5" />
+              </Button>
+            </TableBodyCell>
           </TableBodyRow>
         {/each}
       {/if}
@@ -152,11 +175,11 @@
     aria-label="Table navigation"
   >
     <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-      Showing
+      Mostrando
       <span class="font-semibold text-gray-900 dark:text-white"
         >{startRange}-{endRange}</span
       >
-      of
+      de
       <span class="font-semibold text-gray-900 dark:text-white"
         >{totalEmployees}</span
       >
@@ -168,9 +191,9 @@
       {#each pagesToShow as pageNumber}
         <Button on:click={() => goToPage(pageNumber)}>{pageNumber}</Button>
       {/each}
-      <Button on:click={loadNextPage} disabled={totalPages === endPage}
-        ><ChevronRightOutline size="xs" class="m-1.5" /></Button
-      >
+      <Button on:click={loadNextPage} disabled={totalPages === endPage}>
+        <ChevronRightOutline size="xs" class="m-1.5" />
+      </Button>
     </ButtonGroup>
   </div>
 </div>

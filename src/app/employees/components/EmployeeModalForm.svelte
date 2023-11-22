@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { FormField } from '$lib/shared';
-  import { Button, Modal } from 'flowbite-svelte';
+  import { Button, GradientButton, Modal } from 'flowbite-svelte';
   import type { Employee } from '../models/employee';
   import Form from '$lib/forms/Form.svelte';
   import { PlusSolid } from 'flowbite-svelte-icons';
@@ -14,7 +14,7 @@
   const fields: FormField<Employee>[] = [
     {
       name: 'identification',
-      label: 'Id',
+      label: 'Cédula',
       variant: 'input',
       type: 'number',
       required: true,
@@ -34,21 +34,21 @@
     },
     {
       name: 'phone',
-      label: 'Telefono',
+      label: 'Teléfono',
       variant: 'input',
       type: 'number',
-      required: false,
+      required: true,
     },
   ];
 </script>
 
-<Button on:click={() => (clickOutsideModal = true)}>
+<GradientButton color="green" on:click={() => (clickOutsideModal = true)}>
   <PlusSolid class="h-3.5 w-3.5 mr-2" />Agregar empleado
-</Button>
+</GradientButton>
 
-<Modal title="Registrar empleado" bind:open={clickOutsideModal}>
+<Modal size="xl" title="Registrar empleado" bind:open={clickOutsideModal}>
   <Form
-    columns={3}
+    columns="md:grid-cols-2"
     submitLabel="Registrar"
     formFields={fields}
     class="grid gap-6 p-8 pl-9 pr-9"

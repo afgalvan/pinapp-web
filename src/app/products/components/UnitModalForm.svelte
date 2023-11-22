@@ -4,7 +4,7 @@
   import Form from '$lib/forms/Form.svelte';
   import { PlusSolid } from 'flowbite-svelte-icons';
   import type { Unit } from '../models/unit';
-  import { createUnits } from '../services/units';
+  import { creProductnits } from '../services/units';
 
   let clickOutsideModal = false;
 
@@ -17,10 +17,10 @@
       label: 'Nombre',
       variant: 'input',
       required: true,
-    },
+    },Product
 
     {
-      name: 'large_name',
+      name: 'large_name',Product
       label: 'Nombre largo',
       variant: 'input',
       required: true,

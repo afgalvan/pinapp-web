@@ -16,21 +16,25 @@
     EditOutline,
   } from 'flowbite-svelte-icons';
   import Searchbar from '$lib/components/atomic/Searchbar.svelte';
-  import type { Supplier } from '../models/supplier';
-  import { getProviders } from '../services/provider';
-  import ProviderModalForm from '../components/ProviderModalForm.svelte';
+  import type { Unit } from '../models/unit';
+  import { getProducts } from '../services/units';
+  import UnitModalForm from '../components/UnitModalForm.svelte';
 
-  let paginationData: Supplier[] = [];
-  let totalProviders = 0;
+  let paginationData: Unit[] = [];
+  let totalUnits = 0;
   let searchTerm = '';
 
-  $: getProviders().then((data) => {
-    paginationData = data;
-    totalProviders = paginationData.length;
+  onMount(() => {
+    getUnits().then((data) => {
+      paginationData = data;
+      totalUnits = paginationData.length;
+    });
+    renderPagination(paginationData.length);
   });
+  Product;
 
   let currentPosition = 0;
-  const providersPerPage = 6;
+  const unitsPerPage = 6;
   const showPage = 5;
   let totalPages = 0;
   let pagesToShow: any[] = [];
@@ -38,30 +42,30 @@
   let endPage: number;
 
   const updateDataAndPagination = () => {
-    const currentPageProviders = paginationData.slice(
+    const currentPageUnits = paginationData.slice(
       currentPosition,
-      currentPosition + providersPerPage
+      currentPosition + unitsPerPage
     );
-    renderPagination(currentPageProviders.length);
+    renderPagination(currentPageUnits.length);
   };
 
   $: loadNextPage = () => {
-    if (currentPosition + providersPerPage < paginationData.length) {
-      currentPosition += providersPerPage;
+    if (currentPosition + unitsPerPage < paginationData.length) {
+      currentPosition += unitsPerPage;
       updateDataAndPagination();
     }
   };
 
   const loadPreviousPage = () => {
-    if (currentPosition - providersPerPage >= 0) {
-      currentPosition -= providersPerPage;
+    if (currentPosition - unitsPerPage >= 0) {
+      currentPosition -= unitsPerPage;
       updateDataAndPagination();
     }
   };
 
-  const renderPagination = (totalProviders: number) => {
-    totalPages = Math.ceil(paginationData.length / providersPerPage);
-    const currentPage = Math.ceil((currentPosition + 1) / providersPerPage);
+  const renderPagination = (totalUnits: number) => {
+    totalPages = Math.ceil(paginationData.length / unitsPerPage);
+    const currentPage = Math.ceil((currentPosition + 1) / unitsPerPage);
 
     startPage = currentPage - Math.floor(showPage / 2);
     startPage = Math.max(1, startPage);
@@ -74,51 +78,49 @@
   };
 
   const goToPage = (pageNumber: number) => {
-    currentPosition = (pageNumber - 1) * providersPerPage;
+    currentPosition = (pageNumber - 1) * unitsPerPage;
     updateDataAndPagination();
   };
 
   $: startRange = currentPosition + 1;
-  $: endRange = Math.min(currentPosition + providersPerPage, totalProviders);
+  $: endRange = Math.min(currentPosition + unitsPerPage, totalUnits);
 
-  $: currentPageProviders = paginationData.slice(
+  $: currentPageUnits = paginationData.slice(
     currentPosition,
-    currentPosition + providersPerPage
+    currentPosition + unitsPerPage
   );
 
-  $: filteredProviders = paginationData.filter(
-    (provider) =>
-      provider.name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+  $: filteredUnits = paginationData.filter(
+    (unit) =>
+      unit.short_name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
   );
-
-  onMount(() => {
-    renderPagination(paginationData.length);
-  });
 </script>
 
 <div class="mx-5 flex flex-col gap-5">
   <div class="flex justify-between">
-    <Searchbar placeholder="Buscar proveedor" bind:searchString={searchTerm} />
-    <ProviderModalForm />
+    <Searchbar placeholder="Buscar unidad" bind:searchString={searchTerm} />
+    <UnitModalForm />
   </div>
 
   <Table hoverable shadow>
     <TableHead>
       <TableHeadCell padding="px-4 py-3" scope="col">#</TableHeadCell>
       <TableHeadCell padding="px-4 py-3" scope="col">Nombre</TableHeadCell>
-      <TableHeadCell padding="px-4 py-3" scope="col">Telefono</TableHeadCell>
+      <TableHeadCell padding="px-4 py-3" scope="col">
+        Nombre completo
+      </TableHeadCell>
       <TableHeadCell padding="px-4 py-3" scope="col">Estado</TableHeadCell>
       <TableHeadCell padding="px-4 py-3" scope="col"></TableHeadCell>
     </TableHead>
     <TableBody>
       {#if searchTerm !== ''}
-        {#each filteredProviders as provider}
+        {#each filteredUnits as unit}
           <TableBodyRow>
-            <TableBodyCell tdClass="px-4 py-3">{provider.id}</TableBodyCell>
-            <TableBodyCell tdClass="px-4 py-3">{provider.name}</TableBodyCell>
-            <TableBodyCell tdClass="px-4 py-3">{provider.phone}</TableBodyCell>
+            <TableBodyCell tdClass="px-4 py-3">{unit.id}</TableBodyCell>
+            <TableBodyCell tdClass="px-4 py-3">{unit.short_name}</TableBodyCell>
+            <TableBodyCell tdClass="px-4 py-3">{unit.large_name}</TableBodyCell>
             <TableBodyCell tdClass="px-4 py-3"
-              >{#if provider.active}
+              >{#if unit.active}
                 Activo
               {:else}
                 Inactivo
@@ -132,13 +134,13 @@
           </TableBodyRow>
         {/each}
       {:else}
-        {#each currentPageProviders as provider}
+        {#each currentPageUnits as unit}
           <TableBodyRow>
-            <TableBodyCell tdClass="px-4 py-3">{provider.id}</TableBodyCell>
-            <TableBodyCell tdClass="px-4 py-3">{provider.name}</TableBodyCell>
-            <TableBodyCell tdClass="px-4 py-3">{provider.phone}</TableBodyCell>
+            <TableBodyCell tdClass="px-4 py-3">{unit.id}</TableBodyCell>
+            <TableBodyCell tdClass="px-4 py-3">{unit.short_name}</TableBodyCell>
+            <TableBodyCell tdClass="px-4 py-3">{unit.large_name}</TableBodyCell>
             <TableBodyCell tdClass="px-4 py-3"
-              >{#if provider.active}
+              >{#if unit.active}
                 Activo
               {:else}
                 Inactivo
@@ -165,7 +167,7 @@
       >
       de
       <span class="font-semibold text-gray-900 dark:text-white"
-        >{totalProviders}</span
+        >{totalUnits}</span
       >
     </span>
     <ButtonGroup>

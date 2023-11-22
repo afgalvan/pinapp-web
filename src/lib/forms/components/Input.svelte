@@ -33,7 +33,7 @@
 </script>
 
 <div
-  class="rounded-lg relative inline-flex h-14 w-full flex-col items-start justify-center gap-0 shadow-sm {computedClass}"
+  class="relative inline-flex h-14 w-full flex-col items-start justify-center gap-0 shadow-sm {computedClass}"
   style="cursor: text;"
 >
   <div class="box-border inline-flex h-full w-full items-center gap-1.5">
