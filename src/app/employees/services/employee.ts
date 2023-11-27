@@ -10,7 +10,7 @@ export const getEmployees = async (): Promise<Employee[]> => {
 export const createEmployee = async (employee: Employee) => {
   const { error } = await supabase.from('employees').insert({
     ...employee,
-    user_id: '615170ae-6dbd-417b-8d91-83bea955d972',
+    user_id: '0cd8f10c-6832-4f5f-96f1-01a043d0872f',
     active: true,
   });
   console.log(error);
