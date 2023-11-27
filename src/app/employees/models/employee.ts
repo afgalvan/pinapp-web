@@ -6,4 +6,5 @@ export interface Employee {
   phone: string;
   user_id?: string;
   active: boolean;
+  birth_date?: Date;
 }

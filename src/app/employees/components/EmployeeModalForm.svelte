@@ -1,16 +1,13 @@
 <script lang="ts">
   import type { FormField } from '$lib/shared';
-  import { Button, GradientButton, Modal } from 'flowbite-svelte';
   import type { Employee } from '../models/employee';
   import Form from '$lib/forms/Form.svelte';
-  import { PlusSolid } from 'flowbite-svelte-icons';
   import { createEmployee } from '../services/employee';
-
-  let clickOutsideModal = false;
 
   const onSubmit = async (data: Employee) => {
     createEmployee(data);
   };
+
   const fields: FormField<Employee>[] = [
     {
       name: 'identification',
@@ -39,20 +36,27 @@
       type: 'number',
       required: true,
     },
+    {
+      name: 'birth_date',
+      label: 'Fecha de nacimiento',
+      variant: 'input',
+      type: 'date',
+      required: true,
+    },
+    {
+      name: 'user_id',
+      label: 'Usuario',
+      variant: 'autocomplete',
+      required: true,
+    },
   ];
 </script>
 
-<GradientButton color="green" on:click={() => (clickOutsideModal = true)}>
-  <PlusSolid class="h-3.5 w-3.5 mr-2" />Agregar empleado
-</GradientButton>
-
-<Modal size="xl" title="Registrar empleado" bind:open={clickOutsideModal}>
-  <Form
-    columns="md:grid-cols-2"
-    submitLabel="Registrar"
-    formFields={fields}
-    class="grid gap-6 p-8 pl-9 pr-9"
-    withServerMessage
-    {onSubmit}
-  />
-</Modal>
+<Form
+  columns="md:grid-cols-2"
+  submitLabel="Registrar"
+  formFields={fields}
+  class="grid gap-6 p-8 pl-9 pr-9"
+  withServerMessage
+  {onSubmit}
+/>
